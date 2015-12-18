@@ -22,8 +22,10 @@ namespace GamePadLogger
 
         int inputSize = 30;
         int delayInput = 3;
-        string folder = "sf";
+        string folder = "";
         int frame = 0;
+
+
         public Timer timer = new Timer();
 
         public InputVertical()
@@ -38,12 +40,20 @@ namespace GamePadLogger
             Size = new Size(200, 600);
 
 
-            new Map().ShowDialog();
+           var config =  new Map();
+
+            config.ShowDialog();
+            config.timer.Stop();
+            if (!config.OK)
+            {
+                timer.Stop();
+                Environment.Exit(0);
+            }
+            this.inputSize = config.IconSize;
+            this.folder = config.Theme;
 
             timer.Interval = 1000 / 60;
-
             timer.Tick += Timer_Tick;
-
             timer.Enabled = true;
 
         }
@@ -169,7 +179,7 @@ namespace GamePadLogger
                 if (inputs[i].Count > 0)
                     for (int j = 0; j < inputs[i].Count; j++)
                     {
-                        var file = "inputs/" + folder + "/" + inputs[i][j].ToString() + ".png";
+                        var file = "themes/" + folder + "/" + inputs[i][j].ToString() + ".png";
 
                         if (File.Exists(file))
                         {

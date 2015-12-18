@@ -45,6 +45,14 @@
             this.button12 = new System.Windows.Forms.Button();
             this.txtInputs = new System.Windows.Forms.TextBox();
             this.lblPush = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtIconSize = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbTheme = new System.Windows.Forms.ComboBox();
+            this.button13 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdDevices
@@ -226,11 +234,80 @@
             this.lblPush.Text = "Push The Button to Map...";
             this.lblPush.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(7, 36);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(469, 169);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(4, 214);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(500, 1);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 226);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Icon Size";
+            // 
+            // txtIconSize
+            // 
+            this.txtIconSize.Location = new System.Drawing.Point(65, 223);
+            this.txtIconSize.Name = "txtIconSize";
+            this.txtIconSize.Size = new System.Drawing.Size(144, 20);
+            this.txtIconSize.TabIndex = 20;
+            this.txtIconSize.Text = "30";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 252);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Theme";
+            // 
+            // cmbTheme
+            // 
+            this.cmbTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTheme.FormattingEnabled = true;
+            this.cmbTheme.Location = new System.Drawing.Point(65, 249);
+            this.cmbTheme.Name = "cmbTheme";
+            this.cmbTheme.Size = new System.Drawing.Size(169, 21);
+            this.cmbTheme.TabIndex = 21;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(406, 247);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(75, 23);
+            this.button13.TabIndex = 23;
+            this.button13.Text = "OK";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 215);
+            this.ClientSize = new System.Drawing.Size(493, 282);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.cmbTheme);
+            this.Controls.Add(this.txtIconSize);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblPush);
             this.Controls.Add(this.txtInputs);
             this.Controls.Add(this.button12);
@@ -250,7 +327,9 @@
             this.Controls.Add(this.cmdDevices);
             this.Name = "Map";
             this.Text = "Map";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Map_FormClosing);
             this.Load += new System.EventHandler(this.Map_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,5 +354,12 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TextBox txtInputs;
         private System.Windows.Forms.Label lblPush;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtIconSize;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbTheme;
+        private System.Windows.Forms.Button button13;
     }
 }

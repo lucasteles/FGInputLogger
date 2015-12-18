@@ -95,92 +95,152 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="inputs\sf\1.png">
+    <Content Include="themes\2_PlayStation\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\2.png">
+    <Content Include="themes\2_PlayStation\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\3.png">
+    <Content Include="themes\2_PlayStation\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\4.png">
+    <Content Include="themes\2_PlayStation\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\5.png">
+    <Content Include="themes\2_PlayStation\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\6.png">
+    <Content Include="themes\2_PlayStation\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\7.png">
+    <Content Include="themes\2_PlayStation\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\8.png">
+    <Content Include="themes\2_PlayStation\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\down-left.png">
+    <Content Include="themes\2_PlayStation\down-left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\down-right.png">
+    <Content Include="themes\2_PlayStation\down-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\down.png">
+    <Content Include="themes\2_PlayStation\down.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\left.png">
+    <Content Include="themes\2_PlayStation\left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\right.png">
+    <Content Include="themes\2_PlayStation\right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\up-left.png">
+    <Content Include="themes\2_PlayStation\up-left.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\up-right.png">
+    <Content Include="themes\2_PlayStation\up-right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\sf\up.png">
+    <Content Include="themes\2_PlayStation\up.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\1.png">
+    <Content Include="themes\1_StreetFighter\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\2.png">
+    <Content Include="themes\1_StreetFighter\2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\3.png">
+    <Content Include="themes\1_StreetFighter\3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\4.png">
+    <Content Include="themes\1_StreetFighter\4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\5.png">
+    <Content Include="themes\1_StreetFighter\5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\6.png">
+    <Content Include="themes\1_StreetFighter\6.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\7.png">
+    <Content Include="themes\1_StreetFighter\7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\8.png">
+    <Content Include="themes\1_StreetFighter\8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="themes\1_StreetFighter\down-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\down.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="themes\1_StreetFighter\down-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="themes\1_StreetFighter\down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="themes\1_StreetFighter\left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="inputs\xbox\up.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="themes\1_StreetFighter\right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\1_StreetFighter\up-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\1_StreetFighter\up-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\1_StreetFighter\up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\down-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\down-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\down.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\up-left.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\up-right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\3_Xbox\up.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

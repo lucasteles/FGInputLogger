@@ -52,6 +52,9 @@ namespace GamePadLogger
 
             var buttons = new PressedButtons();
 
+            if (Pad == null)
+                return new PressedButtons();
+
             if (Pad.Poll().IsFailure)
             {
 

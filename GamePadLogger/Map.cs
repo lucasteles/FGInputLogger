@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -15,6 +16,10 @@ namespace GamePadLogger
         public Timer timer = new Timer();
         public bool getKeyState = false;
         public string selectedButton = "";
+
+        public int IconSize = 30;
+        public string Theme = "StreetFighter";
+        public bool OK =  false;
 
         public Map()
         {
@@ -33,14 +38,22 @@ namespace GamePadLogger
 
             timer.Tick += Timer_Tick;
 
+            cmbTheme.DataSource = Directory.GetDirectories("themes").Select(x=>x.Split('\\')[1]).ToArray();
+            cmbTheme.SelectedIndex = 0;
 
             foreach (Control item in this.Controls)
-            {
-                if (!(item is Button) || !(item.Tag.ToString() == "-"))
-                    continue;
+                if (item is Button)
+                {
+                     var but = (Button)item;
+                     if(but.Tag != null && but.Tag.ToString()=="-")
+                           item.Click += set_click;
 
-                item.Click += set_click;
-            }
+
+
+                }
+            
+
+
         }
 
       
@@ -243,6 +256,25 @@ namespace GamePadLogger
             SlimWrapper.Acquire(this, (Guid)cmdDevices.SelectedValue);
             Program.controller = new ControlMap();
             timer.Enabled = true;
+            pictureBox1.Visible = false;
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            OK = true;
+
+            if (!int.TryParse(txtIconSize.Text, out IconSize))
+                IconSize = 30;
+
+            Theme = cmbTheme.SelectedValue.ToString();
+
+            this.Close();
+
+        }
+
+        private void Map_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer.Stop();
         }
     }
 }
