@@ -5,6 +5,7 @@
 ### *beta
 ## [DOWNLOAD HERE](https://lucasteles.github.io/assets/FGInputLogger.zip)
 
+- Cool module for your stream HUD
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/conf.png)
 
