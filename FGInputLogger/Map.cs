@@ -23,7 +23,26 @@ namespace FGInputLogger
         public string Theme = "";
         public bool OK =  false;
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
-        
+
+        private int myVar;
+
+
+
+        public bool Vertical
+        {
+            get
+            {
+                return rdbVertical.Checked;
+            }
+        }
+
+
+
+        public bool Horizontal {
+            get {
+                return rdbHorizontal.Checked;
+            }
+        }
 
         public Map()
         {
@@ -418,5 +437,7 @@ namespace FGInputLogger
                 }                
             }
         }
+
+        
     }
 }

@@ -60,8 +60,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.rdbHorizontal = new System.Windows.Forms.RadioButton();
+            this.rdbVertical = new System.Windows.Forms.RadioButton();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdDevices
@@ -381,11 +386,54 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // rdbHorizontal
+            // 
+            this.rdbHorizontal.AutoSize = true;
+            this.rdbHorizontal.Location = new System.Drawing.Point(385, 237);
+            this.rdbHorizontal.Name = "rdbHorizontal";
+            this.rdbHorizontal.Size = new System.Drawing.Size(72, 17);
+            this.rdbHorizontal.TabIndex = 31;
+            this.rdbHorizontal.Text = "Horizontal";
+            this.rdbHorizontal.UseVisualStyleBackColor = true;
+            // 
+            // rdbVertical
+            // 
+            this.rdbVertical.AutoSize = true;
+            this.rdbVertical.Checked = true;
+            this.rdbVertical.Location = new System.Drawing.Point(316, 237);
+            this.rdbVertical.Name = "rdbVertical";
+            this.rdbVertical.Size = new System.Drawing.Size(60, 17);
+            this.rdbVertical.TabIndex = 32;
+            this.rdbVertical.TabStop = true;
+            this.rdbVertical.Text = "Vertical";
+            this.rdbVertical.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox3.Location = new System.Drawing.Point(302, 226);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(173, 33);
+            this.pictureBox3.TabIndex = 33;
+            this.pictureBox3.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(313, 218);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Input style";
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 494);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.rdbVertical);
+            this.Controls.Add(this.rdbHorizontal);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label6);
@@ -417,6 +465,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdDevices);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Map";
@@ -425,6 +474,7 @@
             this.Load += new System.EventHandler(this.Map_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,5 +513,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.RadioButton rdbHorizontal;
+        private System.Windows.Forms.RadioButton rdbVertical;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label7;
     }
 }

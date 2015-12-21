@@ -29,6 +29,8 @@ namespace FGInputLogger
         public Timer timer = new Timer();
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
+        bool Vertical= true;
+
         public InputVertical()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace FGInputLogger
 
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MinimumSize = new Size(1, 1);
-            Size = new Size(200, 600);
+
 
 
            var config =  new Map();
@@ -51,6 +53,12 @@ namespace FGInputLogger
             this.inputSize = config.IconSize;
             this.folder = config.Theme;
             this.ImageMap = config.ImageMap;
+            Vertical = config.Vertical;
+
+            if (Vertical)
+                Size = new Size(200, 600);
+            else
+                Size = new Size(600, 200);
 
             timer.Interval = 1000 / 60;
             timer.Tick += Timer_Tick;
@@ -179,7 +187,7 @@ namespace FGInputLogger
 
         private void InputVertical_Paint(object sender, PaintEventArgs e)
         {
-            while (inputs.Count * inputSize >= this.Height - inputSize * 2)  {
+            while (inputs.Count * inputSize >= (Vertical ? this.Height : this.Width) - inputSize * 2)  {
                 inputs.Remove(inputs.Last());
             }
 
@@ -202,7 +210,12 @@ namespace FGInputLogger
                                 {
                                     var img = Image.FromFile(file);
                                     img = ResizeImage(img, inputSize, inputSize);
-                                    e.Graphics.DrawImage(img, space + 5 + inputSize * j , i * inputSize + 5);
+
+                                    if (Vertical)
+                                        e.Graphics.DrawImage(img, space + 5 + inputSize * j , i * inputSize + 5);
+                                    else
+                                        e.Graphics.DrawImage(img,i * inputSize + 5, space + 5 + inputSize * j);
+
                                     space += inputSize;
                                 }
                             }
@@ -216,8 +229,11 @@ namespace FGInputLogger
                             {
                                 var img = Image.FromFile(file);
                                 img = ResizeImage(img, inputSize, inputSize);
-                                e.Graphics.DrawImage(img, 5 + inputSize * j, i * inputSize + 5);
 
+                                if (Vertical)
+                                    e.Graphics.DrawImage(img, 5 + inputSize * j, i * inputSize + 5);
+                                else
+                                    e.Graphics.DrawImage(img, i * inputSize + 5, 5 + inputSize * j);
                             }
                         }
                     
