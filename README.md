@@ -21,7 +21,9 @@
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print3.png)
 
 
+- Horizontal inputs
 
+![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/horiz.png)
 
 
 
