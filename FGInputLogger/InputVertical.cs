@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GamePadLogger
+namespace FGInputLogger
 {
     public partial class InputVertical : Form
     {
@@ -21,20 +21,19 @@ namespace GamePadLogger
         List<int> delay = new List<int>();
 
         int inputSize = 30;
-        int delayInput = 3;
+        int delayInput = 2;
         string folder = "";
         int frame = 0;
-
+        bool inDelay = false;
 
         public Timer timer = new Timer();
+        public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
         public InputVertical()
         {
             InitializeComponent();
 
 
-           
-            //ControlBox = false;
             FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MinimumSize = new Size(1, 1);
             Size = new Size(200, 600);
@@ -44,13 +43,14 @@ namespace GamePadLogger
 
             config.ShowDialog();
             config.timer.Stop();
-            if (!config.OK)
+            if (!config.OK || Program.controller.Empty())
             {
                 timer.Stop();
                 Environment.Exit(0);
             }
             this.inputSize = config.IconSize;
             this.folder = config.Theme;
+            this.ImageMap = config.ImageMap;
 
             timer.Interval = 1000 / 60;
             timer.Tick += Timer_Tick;
@@ -61,23 +61,35 @@ namespace GamePadLogger
         private void Timer_Tick(object sender, EventArgs e)
         {
              var buttons = SlimWrapper.GetInputs();
-            var theInput = new List<object>();
+             var theInput = new List<object>();
 
-
-            if (frame >= delayInput)
+            if (!inDelay)
             {
-                frame = 0;
-                if ( delay.Count > 0)
-                    buttons.buttons.AddRange(delay);
+                inDelay = true;
                 delay = new List<int>();
+                frame = 0;
             }
             else
             {
-                if (buttons.buttons.Count>0)
-                     delay.AddRange(buttons.buttons);
+                
+                if (frame >= delayInput)
+                {
+                   
+                    if (delay.Count > 0)
+                    {
+                        delay.AddRange(buttons.buttons);
+                        buttons.buttons = delay;
+                    }
+                    inDelay = false;
+                }
                 else
-                    delay = new List<int>();
-                frame++;
+                {
+                    if (buttons.buttons.Count > 0)
+                        delay.AddRange(buttons.buttons);
+                    else
+                        delay = new List<int>();
+                    frame++;
+                }
             }
 
                 if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) && buttons.buttons.Count > 0)
@@ -147,10 +159,8 @@ namespace GamePadLogger
                         inputs.Insert(0, theInput);
 
                     if (buttons.buttons.Count > 0)
-                    {
-                       
                         Refresh();
-                    }
+
 
                     old = buttons.buttons;
 
@@ -173,20 +183,42 @@ namespace GamePadLogger
                 inputs.Remove(inputs.Last());
             }
 
-
+            
             for (int i = 0; i < inputs.Count; i++)
             {
                 if (inputs[i].Count > 0)
                     for (int j = 0; j < inputs[i].Count; j++)
                     {
-                        var file = "themes/" + folder + "/" + inputs[i][j].ToString() + ".png";
 
-                        if (File.Exists(file))
+                        int imageMapId = 0;
+                        if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
                         {
-                            var img = Image.FromFile(file);
-                            img = ResizeImage(img, inputSize, inputSize);
-                            e.Graphics.DrawImage(img, 5 + inputSize * j, i * inputSize + 5);
-                        
+                            int space = 0;
+                            foreach (var ix in ImageMap[imageMapId])
+                            {
+                                var file = "themes/" + folder + "/" + ix.ToString() + ".png";
+
+                                if (File.Exists(file))
+                                {
+                                    var img = Image.FromFile(file);
+                                    img = ResizeImage(img, inputSize, inputSize);
+                                    e.Graphics.DrawImage(img, space + 5 + inputSize * j , i * inputSize + 5);
+                                    space += inputSize;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            var file = "themes/" + folder + "/" + inputs[i][j].ToString() + ".png";
+
+                            if (File.Exists(file))
+                            {
+                                var img = Image.FromFile(file);
+                                img = ResizeImage(img, inputSize, inputSize);
+                                e.Graphics.DrawImage(img, 5 + inputSize * j, i * inputSize + 5);
+
+                            }
                         }
                     
                     }
@@ -229,70 +261,3 @@ namespace GamePadLogger
 
 
 
-
-
-/*
-        private void InputVertical_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (inputs.Count * inputSize >= this.Height- inputSize*2)
-            {
-                
-                inputs.Remove(inputs.First());
-
-            }
-
-            switch (e.KeyCode)
-            {   
-               case Keys.Left:
-                    inputs.Add("left");
-                    break;
-                case Keys.Up:
-                    inputs.Add("up");
-                    break;
-                case Keys.Right:
-                    inputs.Add("right");
-                    break;
-                case Keys.Down:
-                    inputs.Add("down");
-                    break;
-
-                case Keys.Q:
-                    inputs.Add(1);
-                    break;
-
-                case Keys.W:
-                    inputs.Add(2);
-                    break;
-
-                case Keys.E:
-                    inputs.Add(3);
-                    break;
-
-                case Keys.R:
-                    inputs.Add(4);
-                    break;
-
-                case Keys.A:
-                    inputs.Add(5);
-                    break;
-
-
-                case Keys.S:
-                    inputs.Add(6);
-                    break;
-
-
-                case Keys.D:
-                    inputs.Add(7);
-                    break;
-
-
-                case Keys.F:
-                    inputs.Add(8);
-                    break;
-            }
-
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            Refresh();
-        }
-        */

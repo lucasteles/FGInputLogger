@@ -7,8 +7,8 @@
     <ProjectGuid>{7D056041-02A8-401D-9A96-7F16387A1C7C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GamePadLogger</RootNamespace>
-    <AssemblyName>GamePadLogger</AssemblyName>
+    <RootNamespace>FGInputLogger</RootNamespace>
+    <AssemblyName>FGInputLogger</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -32,7 +32,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>img\ico.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
       <Private>True</Private>
@@ -95,6 +103,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="img\ico.ico" />
     <Content Include="themes\2_PlayStation\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

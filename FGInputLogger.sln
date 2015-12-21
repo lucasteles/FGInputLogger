@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePadLogger", "GamePadLogger\GamePadLogger.csproj", "{7D056041-02A8-401D-9A96-7F16387A1C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FGInputLogger", "FGInputLogger\FGInputLogger.csproj", "{7D056041-02A8-401D-9A96-7F16387A1C7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

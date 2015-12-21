@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GamePadLogger
+namespace FGInputLogger
 {
     public partial class Map : Form
     {
@@ -18,8 +20,10 @@ namespace GamePadLogger
         public string selectedButton = "";
 
         public int IconSize = 30;
-        public string Theme = "StreetFighter";
+        public string Theme = "";
         public bool OK =  false;
+        public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
+        
 
         public Map()
         {
@@ -30,6 +34,15 @@ namespace GamePadLogger
         {
             var controls = SlimWrapper.Available();
             var names = controls.Select(c => c.Name).ToArray();
+
+
+            for (int i = 1; i < 9; i++)
+                ImageMap.Add(i, new List<int> { i });
+
+            cmnButtons.SelectedIndex = 0;
+            fillImageBox();
+            refreshList();
+
 
             cmdDevices.DataSource = controls;
             cmdDevices.DisplayMember = "Name";
@@ -51,12 +64,64 @@ namespace GamePadLogger
 
 
                 }
+
             
-
-
         }
 
+        private void fillImageBox()
+        {
+            lstFiles.ItemChecked -= ItemChecked;
+            var files = Directory.GetFiles("themes\\" + cmbTheme.SelectedValue);
+            
+            lstFiles.LargeImageList = new ImageList();
+            lstFiles.Clear();
+
+            lstFiles.LargeImageList.ImageSize = new Size(32, 32);
+            lstFiles.LargeImageList.ColorDepth = ColorDepth.Depth24Bit;
+            int i = 0;
+
+            foreach (var item in files)
+            {
+                var filename = Path.GetFileNameWithoutExtension(item);
+                int outN;
+                if (int.TryParse(filename, out outN))
+                {
+                    var li = new ListViewItem("");
+                    lstFiles.LargeImageList.Images.Add(Image.FromFile(item));
+                    li.ImageIndex = i;
+                    li.Tag = outN;
+                    lstFiles.Items.Add(li);
+
+                    
+                    i++;
+                }
+            }
+
+
+            lstFiles.ItemChecked += ItemChecked;
+            refreshList();
+
+        }
       
+
+        private void refreshList()
+        {
+
+            
+            var buttons = ImageMap[cmnButtons.SelectedIndex+1];
+
+            foreach (ListViewItem item in lstFiles.Items)
+            {
+                if (buttons.Contains((int)item.Tag))
+                    item.Checked = true;
+                else
+                    item.Checked = false;
+
+                
+
+            }
+
+        }
 
         private void Timer_Tick(object sender, EventArgs e)
     {
@@ -254,7 +319,7 @@ namespace GamePadLogger
     private void btnSelect_Click(object sender, EventArgs e)
         {
             SlimWrapper.Acquire(this, (Guid)cmdDevices.SelectedValue);
-            Program.controller = new ControlMap();
+           // Program.controller = new ControlMap();
             timer.Enabled = true;
             pictureBox1.Visible = false;
         }
@@ -275,6 +340,83 @@ namespace GamePadLogger
         private void Map_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer.Stop();
+        }
+
+        private void cmbTheme_SelectedValueChanged(object sender, EventArgs e)
+        {
+            fillImageBox();
+        }
+
+
+
+        private void cmnButtons_SelectedValueChanged(object sender, EventArgs e)
+        {
+            refreshList();
+        }
+
+
+        private void ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            var newButtons = new List<int>();
+
+            foreach (ListViewItem item in lstFiles.Items)
+            {
+                if (item.Checked)
+                {
+                    newButtons.Add((int)item.Tag);
+                }
+            }
+
+
+            ImageMap[cmnButtons.SelectedIndex + 1] = newButtons;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var obj = new
+            {
+                Buttons = Program.controller,
+                Images = ImageMap,
+                IconSize = IconSize,
+                Theme = cmbTheme.SelectedValue
+            };
+
+            var filelocation = new SaveFileDialog();
+            filelocation.FileName = "config.json";
+            filelocation.Filter = "JSON|*.json";
+            filelocation.Title = "Save the config file";
+            filelocation.ShowDialog();
+
+            if (filelocation.FileName != "")
+            {
+                using (var fs =  new StreamWriter((FileStream)filelocation.OpenFile()))
+                {
+                       var json = JsonConvert.SerializeObject(obj);
+                    fs.Write(json);
+                }
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "JSON|*.json";
+            dialog.Title = "Load config file";
+            dialog.ShowDialog();
+
+            if (dialog.FileName != "")
+            {
+                using (var fs = new StreamReader((FileStream)dialog.OpenFile()))
+                {
+                    dynamic obj = JObject.Parse(fs.ReadToEnd());
+
+                    Program.controller = obj.Buttons.ToObject<ControlMap>();
+                    IconSize = (int)obj.IconSize;
+                    cmbTheme.SelectedItem= obj.Theme.ToString();
+                    ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>(); 
+
+                }                
+            }
         }
     }
 }

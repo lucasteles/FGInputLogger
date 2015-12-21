@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GamePadLogger
+namespace FGInputLogger
 {
     public class ControlMap
     {
-        public GamepadDevice device = null;
+        
 
         public List<int> Left { get; set; }
         public List<int> Right { get; set; }
@@ -42,5 +42,24 @@ namespace GamePadLogger
             KKK = new List<int>();
 
         }
+
+        public bool Empty()
+        {
+            return (Left.Count() +
+                Right.Count() +
+                Up.Count() +
+                Down.Count() +
+                LP.Count() +
+                MP.Count() +
+                HP.Count() +
+                PPP.Count() +
+                LK.Count() +
+                MK.Count() +
+                HK.Count() +
+                KKK.Count()) == 0;
+
+
+
+      }
     }
 }

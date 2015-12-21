@@ -1,4 +1,4 @@
-﻿namespace GamePadLogger
+﻿namespace FGInputLogger
 {
     partial class Map
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Map));
             this.cmdDevices = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSelect = new System.Windows.Forms.Button();
@@ -52,7 +53,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cmbTheme = new System.Windows.Forms.ComboBox();
             this.button13 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmnButtons = new System.Windows.Forms.ComboBox();
+            this.lstFiles = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdDevices
@@ -236,7 +245,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(7, 36);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 36);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(469, 169);
             this.pictureBox1.TabIndex = 17;
@@ -285,10 +294,11 @@
             this.cmbTheme.Name = "cmbTheme";
             this.cmbTheme.Size = new System.Drawing.Size(169, 21);
             this.cmbTheme.TabIndex = 21;
+            this.cmbTheme.SelectedValueChanged += new System.EventHandler(this.cmbTheme_SelectedValueChanged);
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(406, 247);
+            this.button13.Location = new System.Drawing.Point(401, 468);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
             this.button13.TabIndex = 23;
@@ -296,11 +306,92 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(7, 276);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(468, 155);
+            this.pictureBox2.TabIndex = 24;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 306);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 26;
+            this.label5.Text = "Button";
+            // 
+            // cmnButtons
+            // 
+            this.cmnButtons.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmnButtons.FormattingEnabled = true;
+            this.cmnButtons.Items.AddRange(new object[] {
+            "LP",
+            "MP",
+            "HP",
+            "PPP",
+            "LK",
+            "MK",
+            "HK",
+            "KKK"});
+            this.cmnButtons.Location = new System.Drawing.Point(67, 301);
+            this.cmnButtons.Name = "cmnButtons";
+            this.cmnButtons.Size = new System.Drawing.Size(69, 21);
+            this.cmnButtons.TabIndex = 25;
+            this.cmnButtons.SelectedValueChanged += new System.EventHandler(this.cmnButtons_SelectedValueChanged);
+            // 
+            // lstFiles
+            // 
+            this.lstFiles.CheckBoxes = true;
+            this.lstFiles.Location = new System.Drawing.Point(142, 301);
+            this.lstFiles.Name = "lstFiles";
+            this.lstFiles.Size = new System.Drawing.Size(329, 111);
+            this.lstFiles.TabIndex = 27;
+            this.lstFiles.UseCompatibleStateImageBehavior = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(139, 285);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(100, 13);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "Icons for this button";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(7, 437);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(56, 23);
+            this.btnSave.TabIndex = 29;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(7, 459);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(56, 23);
+            this.btnLoad.TabIndex = 30;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 282);
+            this.ClientSize = new System.Drawing.Size(494, 494);
+            this.Controls.Add(this.btnLoad);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lstFiles);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cmnButtons);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cmbTheme);
@@ -325,11 +416,15 @@
             this.Controls.Add(this.btnSelect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmdDevices);
+            this.Controls.Add(this.pictureBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Map";
-            this.Text = "Map";
+            this.Text = "FG Input Logger - Config";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Map_FormClosing);
             this.Load += new System.EventHandler(this.Map_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -361,5 +456,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbTheme;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmnButtons;
+        private System.Windows.Forms.ListView lstFiles;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnLoad;
     }
 }

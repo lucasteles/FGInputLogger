@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GamePadLogger
+namespace FGInputLogger
 {
     public class GamepadDevice
     {
