@@ -3,8 +3,8 @@
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/ico.png)
 # Input Logger for Fighting Games (training style)
 ### *beta
+## [DOWNLOAD HERE](https://lucasteles.github.io/assets/FGInputLogger.zip)
 
-  - Cool module for streaming
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/conf.png)
 
@@ -16,7 +16,7 @@
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print2.png)
 
-- Multiple icon bindera
+- Multiple icon binder
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print3.png)
 
