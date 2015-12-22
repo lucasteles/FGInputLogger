@@ -38,9 +38,11 @@ namespace FGInputLogger
 
 
 
-        public bool Horizontal {
-            get {
-                return rdbHorizontal.Checked;
+        public Color GetBackColor
+        {
+            get
+            {
+                return lblColor.BackColor;
             }
         }
 
@@ -54,6 +56,11 @@ namespace FGInputLogger
             var controls = SlimWrapper.Available();
             var names = controls.Select(c => c.Name).ToArray();
 
+            if (controls.Count == 0)
+            {
+                MessageBox.Show("Connect a controller and restart the application");
+                Environment.Exit(0);
+            }
 
             for (int i = 1; i < 9; i++)
                 ImageMap.Add(i, new List<int> { i });
@@ -386,7 +393,7 @@ namespace FGInputLogger
                 }
             }
 
-
+            newButtons.Sort();
             ImageMap[cmnButtons.SelectedIndex + 1] = newButtons;
         }
 
@@ -397,7 +404,9 @@ namespace FGInputLogger
                 Buttons = Program.controller,
                 Images = ImageMap,
                 IconSize = IconSize,
-                Theme = cmbTheme.SelectedValue
+                Theme = cmbTheme.SelectedValue,
+                Color = lblColor.BackColor
+                
             };
 
             var filelocation = new SaveFileDialog();
@@ -432,12 +441,23 @@ namespace FGInputLogger
                     Program.controller = obj.Buttons.ToObject<ControlMap>();
                     IconSize = (int)obj.IconSize;
                     cmbTheme.SelectedItem= obj.Theme.ToString();
-                    ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>(); 
+                    ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>();
+                    lblColor.BackColor = obj.Color.ToObject<Color>();
 
                 }                
             }
         }
 
-        
+        private void btnPicker_Click(object sender, EventArgs e)
+        {
+            var colorDialog1 = new ColorDialog();
+            DialogResult result =colorDialog1.ShowDialog();
+            // See if user pressed ok.
+            if (result == DialogResult.OK)
+            {
+                // Set form background to the selected color.
+                lblColor.BackColor = colorDialog1.Color;
+            }
+        }
     }
 }

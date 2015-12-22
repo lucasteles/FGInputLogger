@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,10 +22,11 @@ namespace FGInputLogger
         List<int> delay = new List<int>();
 
         int inputSize = 30;
-        int delayInput = 2;
+        int PlinkDelay = 1;
         string folder = "";
         int frame = 0;
         bool inDelay = false;
+        bool HasDelayInput = false;
 
         public Timer timer = new Timer();
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
@@ -36,7 +38,7 @@ namespace FGInputLogger
             InitializeComponent();
 
 
-            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            //FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MinimumSize = new Size(1, 1);
 
 
@@ -54,15 +56,18 @@ namespace FGInputLogger
             this.folder = config.Theme;
             this.ImageMap = config.ImageMap;
             Vertical = config.Vertical;
+            this.pictureBox1.BackColor = BackColor =  config.GetBackColor;
+
 
             if (Vertical)
-                Size = new Size(200, 600);
+                Size = new Size(200, int.MaxValue);
             else
-                Size = new Size(600, 200);
+                Size = new Size(int.MaxValue, 200);
 
             timer.Interval = 1000 / 60;
             timer.Tick += Timer_Tick;
             timer.Enabled = true;
+            
 
         }
 
@@ -71,36 +76,70 @@ namespace FGInputLogger
              var buttons = SlimWrapper.GetInputs();
              var theInput = new List<object>();
 
-            if (!inDelay)
+
+
+            if (buttons.buttons.Count > 0)
             {
-                inDelay = true;
-                delay = new List<int>();
-                frame = 0;
-            }
-            else
-            {
-                
-                if (frame >= delayInput)
+                if (!inDelay)
                 {
-                   
-                    if (delay.Count > 0)
-                    {
-                        delay.AddRange(buttons.buttons);
-                        buttons.buttons = delay;
-                    }
-                    inDelay = false;
+                    inDelay = true;
+                    delay = new List<int>();
+                    delay.AddRange(buttons.buttons);
+
+                    frame = 0;
                 }
                 else
                 {
-                    if (buttons.buttons.Count > 0)
-                        delay.AddRange(buttons.buttons);
-                    else
+
+                    foreach (var b in buttons.buttons)
+                    {
+                        if (!delay.Contains(b))
+                        {
+                            HasDelayInput = true;
+                        }
+                    }
+
+                    if (HasDelayInput)
+                    {
+
+                        foreach (var b in delay)
+                        {
+                            if (!buttons.buttons.Contains(b))
+                            {
+                                buttons.buttons.Add(b);
+                            }
+                        }
+                        buttons.buttons.Sort();
+                        old = new List<int>();
+                       inDelay = false;
                         delay = new List<int>();
+                        frame = -1;
+                        HasDelayInput = false;
+                    }
+
                     frame++;
                 }
+
+                
+
+            }
+            else if (inDelay)
+            {
+
+                frame++;               
+
             }
 
-                if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) && buttons.buttons.Count > 0)
+
+            if (frame >= PlinkDelay)
+            {
+                inDelay = false;
+                delay = new List<int>();
+                frame = 0;
+                HasDelayInput = false;
+            }
+
+            if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) && buttons.buttons.Count > 0)
                 {
                     var up = Program.controller.Up.Intersect(buttons.buttons).Any() ;
                     var down = Program.controller.Down.Intersect(buttons.buttons).Any();
@@ -191,10 +230,14 @@ namespace FGInputLogger
                 inputs.Remove(inputs.Last());
             }
 
-            
+
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             for (int i = 0; i < inputs.Count; i++)
             {
                 if (inputs[i].Count > 0)
+
+                    inputs[i] = inputs[i].Distinct().ToList();
                     for (int j = 0; j < inputs[i].Count; j++)
                     {
 
@@ -202,19 +245,33 @@ namespace FGInputLogger
                         if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
                         {
                             int space = 0;
+
+                                                       
                             foreach (var ix in ImageMap[imageMapId])
                             {
+                                                             
                                 var file = "themes/" + folder + "/" + ix.ToString() + ".png";
 
                                 if (File.Exists(file))
                                 {
                                     var img = Image.FromFile(file);
-                                    img = ResizeImage(img, inputSize, inputSize);
+                                    
 
-                                    if (Vertical)
-                                        e.Graphics.DrawImage(img, space + 5 + inputSize * j , i * inputSize + 5);
-                                    else
-                                        e.Graphics.DrawImage(img,i * inputSize + 5, space + 5 + inputSize * j);
+                                    using (ImageAttributes wrapMode = new ImageAttributes())
+                                    {
+                                        wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                                        Rectangle rect;
+                                        if (Vertical)
+                                            rect = new Rectangle(space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
+                           
+                                        else
+                                            rect = new Rectangle(i * inputSize + 5, space + 5 + inputSize * j, inputSize, inputSize);
+
+                                        
+                                        e.Graphics.DrawImage(img, rect, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, wrapMode);
+                                    }
+
+                                    
 
                                     space += inputSize;
                                 }
@@ -228,12 +285,20 @@ namespace FGInputLogger
                             if (File.Exists(file))
                             {
                                 var img = Image.FromFile(file);
-                                img = ResizeImage(img, inputSize, inputSize);
+                                
+                                using (ImageAttributes wrapMode = new ImageAttributes())
+                                {
+                                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                                    Rectangle rect;
+                                    if (Vertical)
+                                        rect = new Rectangle(5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
+                                    else
+                                        rect = new Rectangle( i * inputSize + 5, 5 + inputSize * j, inputSize, inputSize);
 
-                                if (Vertical)
-                                    e.Graphics.DrawImage(img, 5 + inputSize * j, i * inputSize + 5);
-                                else
-                                    e.Graphics.DrawImage(img, i * inputSize + 5, 5 + inputSize * j);
+
+                                    
+                                    e.Graphics.DrawImage(img, rect, 0, 0, img.Height, img.Width, GraphicsUnit.Pixel, wrapMode);
+                                }
                             }
                         }
                     
@@ -244,7 +309,7 @@ namespace FGInputLogger
 
         }
 
-
+       
 
         public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
         {

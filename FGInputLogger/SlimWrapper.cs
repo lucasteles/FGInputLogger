@@ -10,7 +10,7 @@ namespace FGInputLogger
     class SlimWrapper
     {
         public static Joystick Pad;
-        
+        public static JoystickState State = new JoystickState();
 
         public static IList<GamepadDevice> Available()
         {
@@ -64,9 +64,10 @@ namespace FGInputLogger
             {
 
             }
-
+            State = state;
 
             var _buttons = state.GetButtons().ToList();
+
             var pov = state.GetPointOfViewControllers()[0];
 
             _buttons.Add((state.X / 5000.0f == 1));
@@ -97,6 +98,12 @@ namespace FGInputLogger
 
 
         }
+
+        public static bool isPressed(int i)
+        {
+            return State.IsPressed(i);
+        }
+
     }
 
     internal class PressedButtons
