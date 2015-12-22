@@ -5,7 +5,7 @@
 ### *beta
 ## [DOWNLOAD HERE](https://lucasteles.github.io/assets/FGInputLogger.zip)
 
-- Cool module for your stream HUD
+- Cool module for your stream HUD (set the background color transparent in OBS or another)
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/conf.png)
 
