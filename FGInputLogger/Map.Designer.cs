@@ -68,6 +68,8 @@
             this.lblColor = new System.Windows.Forms.Label();
             this.btnPicker = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.chkDirColumn = new System.Windows.Forms.CheckBox();
+            this.chkFrames = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -308,7 +310,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(401, 468);
+            this.button13.Location = new System.Drawing.Point(400, 488);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
             this.button13.TabIndex = 23;
@@ -319,7 +321,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 276);
+            this.pictureBox2.Location = new System.Drawing.Point(7, 305);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(468, 155);
             this.pictureBox2.TabIndex = 24;
@@ -328,7 +330,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 306);
+            this.label5.Location = new System.Drawing.Point(20, 335);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 26;
@@ -347,7 +349,7 @@
             "MK",
             "HK",
             "KKK"});
-            this.cmnButtons.Location = new System.Drawing.Point(67, 301);
+            this.cmnButtons.Location = new System.Drawing.Point(67, 330);
             this.cmnButtons.Name = "cmnButtons";
             this.cmnButtons.Size = new System.Drawing.Size(69, 21);
             this.cmnButtons.TabIndex = 25;
@@ -356,7 +358,7 @@
             // lstFiles
             // 
             this.lstFiles.CheckBoxes = true;
-            this.lstFiles.Location = new System.Drawing.Point(142, 301);
+            this.lstFiles.Location = new System.Drawing.Point(142, 330);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.Size = new System.Drawing.Size(329, 111);
             this.lstFiles.TabIndex = 27;
@@ -365,7 +367,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 285);
+            this.label6.Location = new System.Drawing.Point(139, 314);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 13);
             this.label6.TabIndex = 28;
@@ -373,7 +375,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(7, 437);
+            this.btnSave.Location = new System.Drawing.Point(7, 466);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(56, 23);
             this.btnSave.TabIndex = 29;
@@ -383,7 +385,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(7, 459);
+            this.btnLoad.Location = new System.Drawing.Point(7, 488);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(56, 23);
             this.btnLoad.TabIndex = 30;
@@ -467,11 +469,31 @@
             this.pictureBox4.TabIndex = 38;
             this.pictureBox4.TabStop = false;
             // 
+            // chkDirColumn
+            // 
+            this.chkDirColumn.Location = new System.Drawing.Point(229, 265);
+            this.chkDirColumn.Name = "chkDirColumn";
+            this.chkDirColumn.Size = new System.Drawing.Size(112, 32);
+            this.chkDirColumn.TabIndex = 39;
+            this.chkDirColumn.Text = "Show directions in separate column";
+            this.chkDirColumn.UseVisualStyleBackColor = true;
+            // 
+            // chkFrames
+            // 
+            this.chkFrames.Location = new System.Drawing.Point(347, 265);
+            this.chkFrames.Name = "chkFrames";
+            this.chkFrames.Size = new System.Drawing.Size(112, 32);
+            this.chkFrames.TabIndex = 40;
+            this.chkFrames.Text = "Show frames of buttons";
+            this.chkFrames.UseVisualStyleBackColor = true;
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 494);
+            this.ClientSize = new System.Drawing.Size(494, 512);
+            this.Controls.Add(this.chkFrames);
+            this.Controls.Add(this.chkDirColumn);
             this.Controls.Add(this.btnPicker);
             this.Controls.Add(this.lblColor);
             this.Controls.Add(this.label8);
@@ -567,5 +589,7 @@
         private System.Windows.Forms.Label lblColor;
         private System.Windows.Forms.Button btnPicker;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.CheckBox chkDirColumn;
+        private System.Windows.Forms.CheckBox chkFrames;
     }
 }

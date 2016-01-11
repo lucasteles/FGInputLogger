@@ -36,7 +36,21 @@ namespace FGInputLogger
             }
         }
 
+        public bool ShowFrames
+        {
+            get
+            {
+                return chkFrames.Checked;
+            }
+        }
 
+        public bool SeparateDirections
+        {
+            get
+            {
+                return chkDirColumn.Checked;
+            }
+        }
 
         public Color GetBackColor
         {
@@ -405,8 +419,10 @@ namespace FGInputLogger
                 Images = ImageMap,
                 IconSize = IconSize,
                 Theme = cmbTheme.SelectedValue,
-                Color = lblColor.BackColor
-                
+                Color = lblColor.BackColor,
+                Vertical = Vertical,
+                ShowFrames = ShowFrames,
+                SeparateDirections = SeparateDirections
             };
 
             var filelocation = new SaveFileDialog();
@@ -443,6 +459,11 @@ namespace FGInputLogger
                     cmbTheme.SelectedItem= obj.Theme.ToString();
                     ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>();
                     lblColor.BackColor = obj.Color.ToObject<Color>();
+                    chkFrames.Checked = obj.ShowFrames.ToObject<bool>();
+                    chkDirColumn.Checked = obj.SeparateDirections.ToObject<bool>();
+
+                    rdbVertical.Checked = obj.Vertical.ToObject<bool>();
+                    rdbHorizontal.Checked = !obj.Vertical.ToObject<bool>();
 
                 }                
             }
@@ -459,5 +480,6 @@ namespace FGInputLogger
                 lblColor.BackColor = colorDialog1.Color;
             }
         }
+
     }
 }

@@ -18,6 +18,8 @@ namespace FGInputLogger
     {
 
         List<List<object>> inputs = new List<List<object>>();
+        List<List<int>> inputsTime = new List<List<int>>();
+        
         List<int> old = new List<int>();
         List<int> delay = new List<int>();
 
@@ -26,12 +28,19 @@ namespace FGInputLogger
         string folder = "";
         int frame = 0;
         bool inDelay = false;
+        bool SeparateDirections = false;
+        bool ShowFrames = false;
         bool HasDelayInput = false;
 
         public Timer timer = new Timer();
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
         bool Vertical= true;
+
+        Stopwatch watch;
+        int contfps = 0;
+        int cont = 0;
+        long soma = 0;
 
         public InputVertical()
         {
@@ -40,10 +49,8 @@ namespace FGInputLogger
 
             //FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MinimumSize = new Size(1, 1);
-
-
-
-           var config =  new Map();
+                        
+            var config =  new Map();
 
             config.ShowDialog();
             config.timer.Stop();
@@ -57,26 +64,30 @@ namespace FGInputLogger
             this.ImageMap = config.ImageMap;
             Vertical = config.Vertical;
             this.pictureBox1.BackColor = BackColor =  config.GetBackColor;
-
+            SeparateDirections = config.SeparateDirections;
+            ShowFrames = config.ShowFrames;
 
             if (Vertical)
                 Size = new Size(200, int.MaxValue);
             else
                 Size = new Size(int.MaxValue, 200);
 
-            timer.Interval = 1000 / 60;
+            timer.Interval = 1000 / 100;
             timer.Tick += Timer_Tick;
             timer.Enabled = true;
-            
+
+            watch = Stopwatch.StartNew();
 
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-             var buttons = SlimWrapper.GetInputs();
+          
+
+            var buttons = SlimWrapper.GetInputs();
              var theInput = new List<object>();
 
-
+            /*
 
             if (buttons.buttons.Count > 0)
             {
@@ -138,23 +149,36 @@ namespace FGInputLogger
                 frame = 0;
                 HasDelayInput = false;
             }
+            */
+            
 
-            if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) && buttons.buttons.Count > 0)
-                {
-                    var up = Program.controller.Up.Intersect(buttons.buttons).Any() ;
-                    var down = Program.controller.Down.Intersect(buttons.buttons).Any();
-                    var left = Program.controller.Left.Intersect(buttons.buttons).Any() ;
-                    var right = Program.controller.Right.Intersect(buttons.buttons).Any() ;
+
+            if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) || buttons.buttons.Count > 0){
+                
+
+                var up = Program.controller.Up.Intersect(buttons.buttons).Any() ;
+                var down = Program.controller.Down.Intersect(buttons.buttons).Any();
+                var left = Program.controller.Left.Intersect(buttons.buttons).Any() ;
+                var right = Program.controller.Right.Intersect(buttons.buttons).Any() ;
 
                 var vup = !old.Intersect(Program.controller.Up).Any();
                 var vdown = !old.Intersect(Program.controller.Down).Any();
                 var vleft = !old.Intersect(Program.controller.Left).Any();
                 var vright = !old.Intersect(Program.controller.Right).Any();
 
+                var lastIsDiagonal = false;
+
+                if (inputs.Count>0)
+                foreach (var i in inputs.First())
+                    lastIsDiagonal = lastIsDiagonal || i.ToString().Contains("-");
+
+                if ( (up && left)|| (up && right) || (down && left) || (down && right) )
+                    lastIsDiagonal = false;
 
                 if (up && left && (vup||vleft) )
                     {
                         theInput.Add("up-left");
+                        
                     }
                     else if (up && right && (vup || vright))
                     {
@@ -170,46 +194,111 @@ namespace FGInputLogger
                     }
                     else
                     {
-                        if (up )
+                        if (up && (vup || lastIsDiagonal) )
                             theInput.Add("up");
 
-                        if (down )
+                        if (down && (vdown || lastIsDiagonal))
                             theInput.Add("down");
 
-                        if (left )
+                        if (left && (vleft || lastIsDiagonal) )
                             theInput.Add("left");
 
-                        if (right )
+                        if (right && (vright || lastIsDiagonal))
                             theInput.Add("right");
 
                     }
 
-                    if (Program.controller.LP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LP).Any())
-                        theInput.Add(1);
-                    if (Program.controller.MP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MP).Any())
-                        theInput.Add(2);
-                    if (Program.controller.HP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HP).Any())
-                        theInput.Add(3);
-                    if (Program.controller.PPP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.PPP).Any())
+
+                if (up && left && !(vup || vleft))
+                {
+                    addTime("up-left");
+                }
+                else if (up && right && !(vup || vright))
+                {
+                    addTime("up-right");
+                }
+                else if (down && left && !(vdown || vleft))
+                {
+                    addTime("down-left");
+                }
+                else if (down && right && !(vdown || vright))
+                {
+                    addTime("down-right");
+                }
+                else
+                {
+
+                    if (up && !vup)
+                        addTime("up");
+
+                    if (down && !vdown)
+                        addTime("down");
+
+                    if (left && !vleft)
+                        addTime("left");
+
+                    if (right && !vright)
+                        addTime("right");
+                }
+
+
+
+                if (Program.controller.LP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LP).Any())
+                    theInput.Add(1);
+                else if (Program.controller.LP.Intersect(buttons.buttons).Any())
+                    addTime(1);
+
+
+                if (Program.controller.MP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MP).Any())
+                    theInput.Add(2);
+                else if (Program.controller.MP.Intersect(buttons.buttons).Any())
+                    addTime(2);
+
+                if (Program.controller.HP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HP).Any())
+                    theInput.Add(3);
+                else if (Program.controller.HP.Intersect(buttons.buttons).Any())
+                    addTime(3);
+
+                if (Program.controller.PPP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.PPP).Any())
                         theInput.Add(4);
-                    if (Program.controller.LK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LK).Any())
+                else if (Program.controller.PPP.Intersect(buttons.buttons).Any())
+                    addTime(4);
+
+                if (Program.controller.LK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LK).Any())
                         theInput.Add(5);
-                    if (Program.controller.MK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MK).Any())
+                else if (Program.controller.LK.Intersect(buttons.buttons).Any())
+                    addTime(5);
+
+                if (Program.controller.MK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MK).Any())
                         theInput.Add(6);
-                    if (Program.controller.HK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HK).Any())
+                else if (Program.controller.MK.Intersect(buttons.buttons).Any())
+                    addTime(6);
+
+                if (Program.controller.HK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HK).Any())
                         theInput.Add(7);
-                    if (Program.controller.KKK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.KKK).Any())
+                else if (Program.controller.HK.Intersect(buttons.buttons).Any())
+                    addTime(7);
+
+                if (Program.controller.KKK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.KKK).Any())
                         theInput.Add(8);
+                else if (Program.controller.KKK.Intersect(buttons.buttons).Any())
+                    addTime(8);
 
 
-                    if (theInput.Count > 0)
+
+                if (theInput.Count > 0)
+                    {
                         inputs.Insert(0, theInput);
+                        inputsTime.Insert(0, Enumerable.Repeat(1, theInput.Count()).ToList());
+                    }
 
-                    if (buttons.buttons.Count > 0)
-                        Refresh();
 
+              
 
-                    old = buttons.buttons;
+                //if (buttons.buttons.Count > 0)
+                Refresh();
+               
+                old = buttons.buttons;
 
 
                 }
@@ -219,23 +308,57 @@ namespace FGInputLogger
                         old = buttons.buttons;
 
                 }
-            
+
+
+         
+            contfps++;
            
-            
+
+            if (contfps>=60)
+            {
+                watch.Stop();
+                Console.WriteLine(watch.ElapsedMilliseconds);
+                contfps = 0;
+                watch.Restart();
+                
+            }
+
+
+        }
+
+        private void addTime(object btn)
+        {
+            for (int i = 0; i < inputs.Count(); i++)
+            {
+                for (int j = 0; j < inputs[i].Count(); j++)
+                {
+                    if (inputs[i][j].Equals(btn))
+                    {
+                        inputsTime[i][j]++;
+                        return;
+                    }
+                }
+            }
+
         }
 
         private void InputVertical_Paint(object sender, PaintEventArgs e)
         {
             while (inputs.Count * inputSize >= (Vertical ? this.Height : this.Width) - inputSize * 2)  {
                 inputs.Remove(inputs.Last());
+                inputsTime.Remove(inputsTime.Last());
             }
 
 
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            var BlankColumn = (SeparateDirections ? inputSize : 0);
+
+        
+
             for (int i = 0; i < inputs.Count; i++)
             {
-                if (inputs[i].Count > 0)
+                if (inputs[i].Count() > 0)
 
                     inputs[i] = inputs[i].Distinct().ToList();
                     for (int j = 0; j < inputs[i].Count; j++)
@@ -262,18 +385,19 @@ namespace FGInputLogger
                                         wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                                         Rectangle rect;
                                         if (Vertical)
-                                            rect = new Rectangle(space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
+                                            rect = new Rectangle(BlankColumn + space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
                            
                                         else
-                                            rect = new Rectangle(i * inputSize + 5, space + 5 + inputSize * j, inputSize, inputSize);
+                                            rect = new Rectangle(i * inputSize + 5, space + 5 + inputSize * j + BlankColumn, inputSize, inputSize);
 
-                                        
+
+                                
                                         e.Graphics.DrawImage(img, rect, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, wrapMode);
                                     }
 
-                                    
 
-                                    space += inputSize;
+
+                                space += inputSize;
                                 }
                             }
 
@@ -281,7 +405,7 @@ namespace FGInputLogger
                         else
                         {
                             var file = "themes/" + folder + "/" + inputs[i][j].ToString() + ".png";
-
+                          
                             if (File.Exists(file))
                             {
                                 var img = Image.FromFile(file);
@@ -291,19 +415,25 @@ namespace FGInputLogger
                                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                                     Rectangle rect;
                                     if (Vertical)
-                                        rect = new Rectangle(5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
+                                        rect = new Rectangle( 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
                                     else
-                                        rect = new Rectangle( i * inputSize + 5, 5 + inputSize * j, inputSize, inputSize);
+                                        rect = new Rectangle( i * inputSize + 5,  5 + inputSize * j, inputSize, inputSize);
 
+                             
 
-                                    
-                                    e.Graphics.DrawImage(img, rect, 0, 0, img.Height, img.Width, GraphicsUnit.Pixel, wrapMode);
+                                 e.Graphics.DrawImage(img, rect, 0, 0, img.Height, img.Width, GraphicsUnit.Pixel, wrapMode);
                                 }
                             }
                         }
                     
                     }
-               
+                if (ShowFrames)
+                {
+                    if (Vertical)
+                        e.Graphics.DrawString(String.Join(",", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, inputs[i].Count() * inputSize + inputSize / 2, i * inputSize + 4);
+                    else
+                        e.Graphics.DrawString(String.Join("\n", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, inputs[i].Count() * inputSize + inputSize / 2);
+                }
             }
            
 
