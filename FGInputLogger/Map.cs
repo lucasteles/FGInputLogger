@@ -366,6 +366,16 @@ namespace FGInputLogger
 
         private void button13_Click(object sender, EventArgs e)
         {
+
+            if (pictureBox1.Visible)
+            {
+                MessageBox.Show("Select a joystick device!");
+                cmdDevices.Focus();
+
+                return;
+            }
+
+
             OK = true;
 
             if (!int.TryParse(txtIconSize.Text, out IconSize))

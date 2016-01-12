@@ -24,6 +24,9 @@ namespace FGInputLogger
         
         List<int> old = new List<int>();
         List<int> delay = new List<int>();
+        List<int> delayBuff = new List<int>();
+
+        Dictionary<object, int> pressed = new Dictionary<object, int>();
 
         Dictionary<string, Image> Icons = new Dictionary<string, Image>();
 
@@ -45,7 +48,7 @@ namespace FGInputLogger
       
         int contfps = 0;
 
-   
+        
 
 
         public InputVertical()
@@ -122,7 +125,7 @@ namespace FGInputLogger
             var buttons = SlimWrapper.GetInputs();
              var theInput = new List<object>();
 
-
+            #region "plink"
             //-------------------------------------------------------------
 
 
@@ -133,12 +136,12 @@ namespace FGInputLogger
                     inDelay = true;
                     delay = new List<int>();
                     delay.AddRange(buttons.buttons);
-
+                    delayBuff = old;
                     frame = 0;
                 }
                 else
                 {
-
+                    
                     foreach (var b in buttons.buttons)
                     {
                         if (!delay.Contains(b) && !old.Contains(b))
@@ -153,15 +156,24 @@ namespace FGInputLogger
                     {
 
                         foreach (var b in delay)
-                            if (!buttons.buttons.Contains(b))
+                            if (!buttons.buttons.Contains(b) )
                                 buttons.buttons.Add(b);
+
+                      
 
                         inDelay = false;
                         buttons.buttons.Sort();
                         old = new List<int>();
+                        
                         delay = new List<int>();
                         frame = -1;
-                        HasDelayInput = false;
+                       
+
+                        /*for (int i = 0; i < delayBuff.Count(); i++)
+                        {
+                            buttons.buttons.Remove(delayBuff[i]);
+                            old.Add(delayBuff[i]);
+                        }*/
                     }
 
                     frame++;
@@ -176,7 +188,7 @@ namespace FGInputLogger
                 frame++;               
 
             }
-            
+
             if (frame >= PlinkDelay)
             {
                 inDelay = false;
@@ -184,11 +196,11 @@ namespace FGInputLogger
                 frame = 0;
                 HasDelayInput = false;
             }
-            
+
             //-------------------------------------------------------------
+            #endregion
 
-
-            if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) || buttons.buttons.Count > 0){
+            if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) || buttons.buttons.Count > 0) {
 
 
                 var up = Any(buttons.buttons, Program.controller.Up);
@@ -196,10 +208,11 @@ namespace FGInputLogger
                 var left =  Any(buttons.buttons, Program.controller.Left ) ;
                 var right = Any(buttons.buttons, Program.controller.Right) ;
 
-                var vup = !  Any(old,Program.controller.Up);
-                var vdown = !Any(old,Program.controller.Down);
-                var vleft = ! Any(old,Program.controller.Left);
-                var vright = !Any(old,Program.controller.Right);
+                var vup =   !Any(old,Program.controller.Up) || ValidButtonChange(buttons.buttons,old);
+                var vdown = !Any(old,Program.controller.Down) || ValidButtonChange(buttons.buttons, old);
+                var vleft = !Any(old,Program.controller.Left) || ValidButtonChange(buttons.buttons, old);
+                var vright = !Any(old,Program.controller.Right) || ValidButtonChange(buttons.buttons, old);
+                
 
                 var lastIsDiagonal = false;
 
@@ -210,36 +223,60 @@ namespace FGInputLogger
                 if ( (up && left)|| (up && right) || (down && left) || (down && right) )
                     lastIsDiagonal = false;
 
+                Action<Object, List<int>> Add = (obj,lst) =>
+                {
+                    theInput.Add(obj);
+
+                    if ( HasDelayInput && pressed.ContainsKey(obj) && pressed[obj] > 0 && lst != null && Any(delayBuff, lst))
+                    {
+                        theInput.Remove(obj);
+                    }
+                                           
+
+                    int _;
+                    if (pressed.ContainsKey(obj))
+                        if (int.TryParse(obj.ToString(), out _))
+                        {
+                            pressed.Remove(obj);
+                        }
+                        else
+                        {
+                            if (!ValidButtonChange(buttons.buttons, old) && pressed[obj] > 0)
+                                pressed.Remove(obj);
+                        }
+
+                };
+
                 if (up && left && (vup||vleft) )
                     {
-                        theInput.Add("up-left");
+                        Add("up-left",null);
                         
                     }
                     else if (up && right && (vup || vright))
                     {
-                        theInput.Add("up-right");
+                        Add("up-right", null);
                     }
                     else if (down && left && (vdown || vleft))
                     {
-                        theInput.Add("down-left");
+                        Add("down-left", null);
                     }
                     else if (down && right && (vdown || vright))
                     {
-                        theInput.Add("down-right");
+                        Add("down-right", null);
                     }
                     else
                     {
                         if (up && (vup || lastIsDiagonal) )
-                            theInput.Add("up");
+                            Add("up", null);
 
                         if (down && (vdown || lastIsDiagonal))
-                            theInput.Add("down");
+                            Add("down", null);
 
                         if (left && (vleft || lastIsDiagonal) )
-                            theInput.Add("left");
+                            Add("left", null);
 
                         if (right && (vright || lastIsDiagonal))
-                            theInput.Add("right");
+                            Add("right", null);
 
                     }
 
@@ -280,64 +317,76 @@ namespace FGInputLogger
 
                 if (Any(buttons.buttons, Program.controller.LP))
                     if (!Any(old, Program.controller.LP))
-                        theInput.Add(1);
+                        Add(1, Program.controller.LP);
                     else
                         addTime(1);
 
 
                 if (Any(buttons.buttons, Program.controller.MP))
                     if (!Any(old, Program.controller.MP))
-                        theInput.Add(2);
+                        Add(2, Program.controller.MP);
                     else
                         addTime(2);
 
                 if (Any(buttons.buttons, Program.controller.HP))
                     if (!Any(old, Program.controller.HP))
-                        theInput.Add(3);
+                        Add(3, Program.controller.HP);
                     else
                         addTime(3);
 
                 if (Any(buttons.buttons, Program.controller.PPP))
                     if (!Any(old, Program.controller.PPP))
-                        theInput.Add(4);
+                        Add(4, Program.controller.PPP);
                     else
                         addTime(4);
 
                 if (Any(buttons.buttons, Program.controller.LK))
                     if (!Any(old, Program.controller.LK))
-                        theInput.Add(5);
+                        Add(5, Program.controller.LK);
                     else
                         addTime(5);
 
                 if (Any(buttons.buttons, Program.controller.MK))
                     if (!Any(old, Program.controller.MK))
-                        theInput.Add(6);
+                        Add(6, Program.controller.MK);
                     else
                         addTime(6);
 
                 if (Any(buttons.buttons, Program.controller.HK))
                     if (!Any(old, Program.controller.HK))
-                        theInput.Add(7);
+                        Add(7, Program.controller.HK);
                     else
                         addTime(7);
 
                 if (Any(buttons.buttons, Program.controller.KKK))
                     if (!Any(old, Program.controller.KKK))
-                        theInput.Add(8);
+                        Add(8, Program.controller.KKK);
                     else
                         addTime(8);
 
 
+            
+
                 if (theInput.Count > 0)
                     {
                         inputs.Insert(0, theInput);
-                        inputsTime.Insert(0, Enumerable.Repeat(1, theInput.Count()).ToList());
+
+                        var time = new List<int>();
+                        for (int i = 0; i < theInput.Count(); i++)
+                        {
+                            if (pressed.ContainsKey(theInput[i]) && pressed[theInput[i]] > 0)
+                            {
+                                time.Add(-1);
+                            }
+                            else
+                                time.Add(1);
+                                
+                        }
+                        inputsTime.Insert(0,time);
                     }
 
+           
 
-
-
-                //if (buttons.buttons.Count > 0)
                 pictureBox1.BeginInvoke((Action) (() =>
                 {
                     pictureBox1.Refresh();
@@ -345,20 +394,44 @@ namespace FGInputLogger
 
                 old = buttons.buttons;
 
+                
 
                 }
                 else
                 {
                     if (buttons.buttons.Count == 0)
+                    {
                         old = buttons.buttons;
+                        
+                    }
 
-                }
+
+               }
+
+            if (HasDelayInput)
+                HasDelayInput = false;
 
 
-         
+        }
+
+        private bool ValidButtonChange(IList<int> atual, IList<int> old) {
+            var ret = false;
+
             
+            foreach (var item in atual)
+            {
 
-            
+                if (Program.controller.Up.Contains(item) ||
+                Program.controller.Down.Contains(item) ||
+                Program.controller.Left.Contains(item) ||
+                Program.controller.Right.Contains(item))
+                    break;
+
+                if (!old.Contains(item))
+                    ret = true;
+            }
+
+            return ret;
         }
 
         private bool Any(IList<int> a, IList<int> b)
@@ -381,9 +454,15 @@ namespace FGInputLogger
             {
                 for (int j = 0; j < inputs[i].Count(); j++)
                 {
-                    if (inputs[i][j].Equals(btn))
+                    if (inputs[i][j].Equals(btn) && inputsTime[i][j]>=0)
                     {
                         inputsTime[i][j]++;
+                        if (!pressed.ContainsKey(btn))
+                            pressed.Add(btn,0);
+                        else
+                            pressed[btn] ++;
+
+
                         return;
                     }
                 }
@@ -495,9 +574,9 @@ namespace FGInputLogger
                 if (ShowFrames)
                 {
                     if (Vertical)
-                        e.Graphics.DrawString(String.Join(",", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, CountIcons(inputs[i]) * inputSize + inputSize / 2, i * inputSize + 4);
+                        e.Graphics.DrawString(String.Join(",", inputsTime[i]).Replace("-1","-"), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, CountIcons(inputs[i]) * inputSize + inputSize / 2, i * inputSize + 4);
                     else
-                        e.Graphics.DrawString(String.Join("\n", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, CountIcons(inputs[i]) * inputSize + inputSize / 2);
+                        e.Graphics.DrawString(String.Join("\n", inputsTime[i]).Replace("-1", "-"), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, CountIcons(inputs[i]) * inputSize + inputSize / 2);
                 }
             }
            
