@@ -10,6 +10,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FGInputLogger
@@ -23,6 +25,8 @@ namespace FGInputLogger
         List<int> old = new List<int>();
         List<int> delay = new List<int>();
 
+        Dictionary<string, Image> Icons = new Dictionary<string, Image>();
+
         int inputSize = 30;
         int PlinkDelay = 1;
         string folder = "";
@@ -32,22 +36,21 @@ namespace FGInputLogger
         bool ShowFrames = false;
         bool HasDelayInput = false;
 
-        public Timer timer = new Timer();
+       // public Timer timer = new Timer();
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
         bool Vertical= true;
 
         Stopwatch watch;
         int contfps = 0;
-        int cont = 0;
-        long soma = 0;
+
+   
+
 
         public InputVertical()
         {
             InitializeComponent();
 
-
-            //FormBorderStyle = FormBorderStyle.SizableToolWindow;
             MinimumSize = new Size(1, 1);
                         
             var config =  new Map();
@@ -56,7 +59,7 @@ namespace FGInputLogger
             config.timer.Stop();
             if (!config.OK || Program.controller.Empty())
             {
-                timer.Stop();
+                //timer.Stop();
                 Environment.Exit(0);
             }
             this.inputSize = config.IconSize;
@@ -72,15 +75,18 @@ namespace FGInputLogger
             else
                 Size = new Size(int.MaxValue, 200);
 
-            timer.Interval = 1000 / 100;
+            /*timer.Interval = 1000 / 60;
             timer.Tick += Timer_Tick;
             timer.Enabled = true;
+            */
 
             watch = Stopwatch.StartNew();
-
+           
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+     
+
+        public void Draw()
         {
           
 
@@ -154,17 +160,17 @@ namespace FGInputLogger
 
 
             if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) || buttons.buttons.Count > 0){
-                
 
-                var up = Program.controller.Up.Intersect(buttons.buttons).Any() ;
-                var down = Program.controller.Down.Intersect(buttons.buttons).Any();
-                var left = Program.controller.Left.Intersect(buttons.buttons).Any() ;
-                var right = Program.controller.Right.Intersect(buttons.buttons).Any() ;
 
-                var vup = !old.Intersect(Program.controller.Up).Any();
-                var vdown = !old.Intersect(Program.controller.Down).Any();
-                var vleft = !old.Intersect(Program.controller.Left).Any();
-                var vright = !old.Intersect(Program.controller.Right).Any();
+                var up = Any(buttons.buttons, Program.controller.Up);
+                var down =  Any(buttons.buttons, Program.controller.Down );
+                var left =  Any(buttons.buttons, Program.controller.Left ) ;
+                var right = Any(buttons.buttons, Program.controller.Right) ;
+
+                var vup = !  Any(old,Program.controller.Up);
+                var vdown = !Any(old,Program.controller.Down);
+                var vleft = ! Any(old,Program.controller.Left);
+                var vright = !Any(old,Program.controller.Right);
 
                 var lastIsDiagonal = false;
 
@@ -243,47 +249,54 @@ namespace FGInputLogger
 
 
 
-                if (Program.controller.LP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LP).Any())
-                    theInput.Add(1);
-                else if (Program.controller.LP.Intersect(buttons.buttons).Any())
-                    addTime(1);
+                if (Any(buttons.buttons, Program.controller.LP))
+                    if (!Any(old, Program.controller.LP))
+                        theInput.Add(1);
+                    else
+                        addTime(1);
 
 
-                if (Program.controller.MP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MP).Any())
-                    theInput.Add(2);
-                else if (Program.controller.MP.Intersect(buttons.buttons).Any())
-                    addTime(2);
+                if (Any(buttons.buttons, Program.controller.MP))
+                    if (!Any(old, Program.controller.MP))
+                        theInput.Add(2);
+                    else
+                        addTime(2);
 
-                if (Program.controller.HP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HP).Any())
-                    theInput.Add(3);
-                else if (Program.controller.HP.Intersect(buttons.buttons).Any())
-                    addTime(3);
+                if (Any(buttons.buttons, Program.controller.HP))
+                    if (!Any(old, Program.controller.HP))
+                        theInput.Add(3);
+                    else
+                        addTime(3);
 
-                if (Program.controller.PPP.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.PPP).Any())
+                if (Any(buttons.buttons, Program.controller.PPP))
+                    if (!Any(old, Program.controller.PPP))
                         theInput.Add(4);
-                else if (Program.controller.PPP.Intersect(buttons.buttons).Any())
-                    addTime(4);
+                    else
+                        addTime(4);
 
-                if (Program.controller.LK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.LK).Any())
+                if (Any(buttons.buttons, Program.controller.LK))
+                    if (!Any(old, Program.controller.LK))
                         theInput.Add(5);
-                else if (Program.controller.LK.Intersect(buttons.buttons).Any())
-                    addTime(5);
+                    else
+                        addTime(5);
 
-                if (Program.controller.MK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.MK).Any())
+                if (Any(buttons.buttons, Program.controller.MK))
+                    if (!Any(old, Program.controller.MK))
                         theInput.Add(6);
-                else if (Program.controller.MK.Intersect(buttons.buttons).Any())
-                    addTime(6);
+                    else
+                        addTime(6);
 
-                if (Program.controller.HK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.HK).Any())
+                if (Any(buttons.buttons, Program.controller.HK))
+                    if (!Any(old, Program.controller.HK))
                         theInput.Add(7);
-                else if (Program.controller.HK.Intersect(buttons.buttons).Any())
-                    addTime(7);
+                    else
+                        addTime(7);
 
-                if (Program.controller.KKK.Intersect(buttons.buttons).Any() && !old.Intersect(Program.controller.KKK).Any())
+                if (Any(buttons.buttons, Program.controller.KKK))
+                    if (!Any(old, Program.controller.KKK))
                         theInput.Add(8);
-                else if (Program.controller.KKK.Intersect(buttons.buttons).Any())
-                    addTime(8);
-
+                    else
+                        addTime(8);
 
 
                 if (theInput.Count > 0)
@@ -293,11 +306,11 @@ namespace FGInputLogger
                     }
 
 
-              
+
 
                 //if (buttons.buttons.Count > 0)
-                Refresh();
-               
+                 pictureBox1.Refresh();
+
                 old = buttons.buttons;
 
 
@@ -312,18 +325,37 @@ namespace FGInputLogger
 
          
             contfps++;
-           
 
-            if (contfps>=60)
+            watch.Stop();
+            if (watch.ElapsedMilliseconds >= 1000)
             {
-                watch.Stop();
-                Console.WriteLine(watch.ElapsedMilliseconds);
+
+                Console.WriteLine(contfps);
                 contfps = 0;
                 watch.Restart();
-                
+
+            }
+            else
+                watch.Start();
+
+
+            
+
+            
+        }
+
+        private bool Any(IList<int> a, IList<int> b)
+        {
+
+
+            foreach (var item in a)
+            {
+                if (b.Contains(item))
+                    return true;
             }
 
 
+            return false;
         }
 
         private void addTime(object btn)
@@ -368,18 +400,26 @@ namespace FGInputLogger
                         if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
                         {
                             int space = 0;
-
+                            
                                                        
                             foreach (var ix in ImageMap[imageMapId])
                             {
                                                              
                                 var file = "themes/" + folder + "/" + ix.ToString() + ".png";
 
-                                if (File.Exists(file))
-                                {
-                                    var img = Image.FromFile(file);
-                                    
+                                Image img = null;
 
+                                if (Icons.ContainsKey(file))
+                                    img = Icons[file];
+                                else
+                                 if (File.Exists(file))
+                                    {
+                                        img = Image.FromFile(file);
+                                        Icons.Add(file, img);
+                                    }
+
+                            if (img!=null)
+                                {                                    
                                     using (ImageAttributes wrapMode = new ImageAttributes())
                                     {
                                         wrapMode.SetWrapMode(WrapMode.TileFlipXY);
@@ -405,11 +445,21 @@ namespace FGInputLogger
                         else
                         {
                             var file = "themes/" + folder + "/" + inputs[i][j].ToString() + ".png";
-                          
+
+                            Image img = null;
+
+                        if (Icons.ContainsKey(file))
+                            img = Icons[file];
+                        else
                             if (File.Exists(file))
                             {
-                                var img = Image.FromFile(file);
-                                
+                                img = Image.FromFile(file);
+                                Icons.Add(file, img);
+                            }
+
+                            if (img != null)
+                            {
+                                                               
                                 using (ImageAttributes wrapMode = new ImageAttributes())
                                 {
                                     wrapMode.SetWrapMode(WrapMode.TileFlipXY);

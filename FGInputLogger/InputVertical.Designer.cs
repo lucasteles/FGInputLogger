@@ -57,7 +57,6 @@
             this.KeyPreview = true;
             this.Name = "InputVertical";
             this.Text = "FGIL- Inputs";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.InputVertical_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
