@@ -29,10 +29,10 @@ namespace FGInputLogger
             MainForm =  new  InputVertical();
 
            
-            Application.Idle += new EventHandler(OnApplicationIdle);
+           // Application.Idle += new EventHandler(OnApplicationIdle);
             Application.Run(MainForm);
 
-            milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+           // milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
 
             
         }
@@ -40,7 +40,7 @@ namespace FGInputLogger
 
         private static void OnApplicationIdle(object sender, EventArgs e)
         {
-            Console.WriteLine("----------------------------------------------------------------------------------");
+            
             while (AppStillIdle)
             {
                 

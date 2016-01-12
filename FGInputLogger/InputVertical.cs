@@ -35,13 +35,14 @@ namespace FGInputLogger
         bool SeparateDirections = false;
         bool ShowFrames = false;
         bool HasDelayInput = false;
-
-       // public Timer timer = new Timer();
+        Thread thread;
+        public long milliseconds;
+        public long milliseconds2;
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
-
+        bool stopThread = false;
         bool Vertical= true;
 
-        Stopwatch watch;
+      
         int contfps = 0;
 
    
@@ -59,7 +60,6 @@ namespace FGInputLogger
             config.timer.Stop();
             if (!config.OK || Program.controller.Empty())
             {
-                //timer.Stop();
                 Environment.Exit(0);
             }
             this.inputSize = config.IconSize;
@@ -75,16 +75,45 @@ namespace FGInputLogger
             else
                 Size = new Size(int.MaxValue, 200);
 
-            /*timer.Interval = 1000 / 60;
-            timer.Tick += Timer_Tick;
-            timer.Enabled = true;
-            */
 
-            watch = Stopwatch.StartNew();
-           
+          
+            milliseconds = milliseconds2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+             thread = new Thread(new ThreadStart(MainLoop));
+            thread.Start();
         }
 
      
+        private void MainLoop()
+        {
+            while(!stopThread)
+            {
+
+                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds;
+                               
+            
+                if (diff >= (1000 / 59))
+                {
+
+                    Draw();
+
+                    contfps++;
+                    
+
+                    milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                }
+
+                /*
+                diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds2;          
+           
+                if (diff >= (1000))
+                {
+                    Console.WriteLine(contfps);
+                    contfps = 0;
+                    milliseconds2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                }*/
+
+            }
+        }
 
         public void Draw()
         {
@@ -93,9 +122,11 @@ namespace FGInputLogger
             var buttons = SlimWrapper.GetInputs();
              var theInput = new List<object>();
 
-            /*
 
-            if (buttons.buttons.Count > 0)
+            //-------------------------------------------------------------
+
+
+            if (buttons.buttons.Count() > 0 && buttons.buttons.Count() != old.Count())
             {
                 if (!inDelay)
                 {
@@ -110,25 +141,24 @@ namespace FGInputLogger
 
                     foreach (var b in buttons.buttons)
                     {
-                        if (!delay.Contains(b))
+                        if (!delay.Contains(b) && !old.Contains(b))
                         {
                             HasDelayInput = true;
+                            break;
                         }
                     }
+
 
                     if (HasDelayInput)
                     {
 
                         foreach (var b in delay)
-                        {
                             if (!buttons.buttons.Contains(b))
-                            {
                                 buttons.buttons.Add(b);
-                            }
-                        }
+
+                        inDelay = false;
                         buttons.buttons.Sort();
                         old = new List<int>();
-                       inDelay = false;
                         delay = new List<int>();
                         frame = -1;
                         HasDelayInput = false;
@@ -146,8 +176,7 @@ namespace FGInputLogger
                 frame++;               
 
             }
-
-
+            
             if (frame >= PlinkDelay)
             {
                 inDelay = false;
@@ -155,8 +184,8 @@ namespace FGInputLogger
                 frame = 0;
                 HasDelayInput = false;
             }
-            */
             
+            //-------------------------------------------------------------
 
 
             if (!(old.All(x => buttons.buttons.Contains(x)) && buttons.buttons.All(x => old.Contains(x))) || buttons.buttons.Count > 0){
@@ -309,7 +338,10 @@ namespace FGInputLogger
 
 
                 //if (buttons.buttons.Count > 0)
-                 pictureBox1.Refresh();
+                pictureBox1.BeginInvoke((Action) (() =>
+                {
+                    pictureBox1.Refresh();
+                }));
 
                 old = buttons.buttons;
 
@@ -324,21 +356,6 @@ namespace FGInputLogger
 
 
          
-            contfps++;
-
-            watch.Stop();
-            if (watch.ElapsedMilliseconds >= 1000)
-            {
-
-                Console.WriteLine(contfps);
-                contfps = 0;
-                watch.Restart();
-
-            }
-            else
-                watch.Start();
-
-
             
 
             
@@ -386,24 +403,23 @@ namespace FGInputLogger
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             var BlankColumn = (SeparateDirections ? inputSize : 0);
 
-        
 
+            
             for (int i = 0; i < inputs.Count; i++)
             {
                 if (inputs[i].Count() > 0)
-
                     inputs[i] = inputs[i].Distinct().ToList();
-                    for (int j = 0; j < inputs[i].Count; j++)
+
+                int adjust = 0;
+                for (int j = 0; j < inputs[i].Count; j++)
                     {
 
                         int imageMapId = 0;
                         if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
                         {
-                            int space = 0;
-                            
-                                                       
-                            foreach (var ix in ImageMap[imageMapId])
-                            {
+                               int space = 0;
+                               foreach (var ix in ImageMap[imageMapId])
+                              {
                                                              
                                 var file = "themes/" + folder + "/" + ix.ToString() + ".png";
 
@@ -418,28 +434,27 @@ namespace FGInputLogger
                                         Icons.Add(file, img);
                                     }
 
-                            if (img!=null)
-                                {                                    
+                                if (img!=null){                                    
                                     using (ImageAttributes wrapMode = new ImageAttributes())
                                     {
                                         wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                                         Rectangle rect;
                                         if (Vertical)
-                                            rect = new Rectangle(BlankColumn + space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
+                                            rect = new Rectangle(adjust + BlankColumn + space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
                            
                                         else
-                                            rect = new Rectangle(i * inputSize + 5, space + 5 + inputSize * j + BlankColumn, inputSize, inputSize);
+                                            rect = new Rectangle(adjust + i * inputSize + 5, space + 5 + inputSize * j + BlankColumn, inputSize, inputSize);
 
 
                                 
                                         e.Graphics.DrawImage(img, rect, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, wrapMode);
+
                                     }
-
-
-
-                                space += inputSize;
+                                    space += inputSize;
                                 }
                             }
+
+                        adjust += (ImageMap[imageMapId].Count()-1) * inputSize;
 
                         }
                         else
@@ -480,15 +495,32 @@ namespace FGInputLogger
                 if (ShowFrames)
                 {
                     if (Vertical)
-                        e.Graphics.DrawString(String.Join(",", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, inputs[i].Count() * inputSize + inputSize / 2, i * inputSize + 4);
+                        e.Graphics.DrawString(String.Join(",", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, CountIcons(inputs[i]) * inputSize + inputSize / 2, i * inputSize + 4);
                     else
-                        e.Graphics.DrawString(String.Join("\n", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, inputs[i].Count() * inputSize + inputSize / 2);
+                        e.Graphics.DrawString(String.Join("\n", inputsTime[i]), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, CountIcons(inputs[i]) * inputSize + inputSize / 2);
                 }
             }
            
 
         }
+        private int CountIcons(List<object> buttons)
+        {
+            int ret = 0;
 
+            foreach (var item in buttons)
+            {
+                int imageMapId = 0;
+                if (int.TryParse(item.ToString(), out imageMapId))
+                {
+                    ret += ImageMap[imageMapId].Count();
+                }
+                else
+                    ret++;
+
+            }
+
+            return ret;
+        }
        
 
         public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
@@ -515,6 +547,12 @@ namespace FGInputLogger
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             InputVertical_Paint(sender, e);
+        }
+
+        private void InputVertical_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            stopThread = true;
+
         }
     }
 }

@@ -57,6 +57,7 @@
             this.KeyPreview = true;
             this.Name = "InputVertical";
             this.Text = "FGIL- Inputs";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InputVertical_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
