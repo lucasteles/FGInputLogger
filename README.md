@@ -35,5 +35,12 @@ alt="Video" width="240" height="180" border="2" /></a>
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/horiz.png)
 
+- Directinals in separeted column
+
+![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print4.png)
+
+- Show pressed buttons frames 
+
+![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print5.png)
 
 
