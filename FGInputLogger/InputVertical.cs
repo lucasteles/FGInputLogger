@@ -96,9 +96,13 @@ namespace FGInputLogger
             
                 if (diff >= (1000 / 59))
                 {
-
-                    Draw();
-
+                    try
+                    {
+                        Draw();
+                    }
+                    catch
+                    {}
+                    
                    // contfps++;
                     
 
