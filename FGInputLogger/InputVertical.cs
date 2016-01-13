@@ -91,34 +91,36 @@ namespace FGInputLogger
             while(!stopThread)
             {
 
-                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds;
-                               
-            
-                if (diff >= (1000 / 59))
-                {
-                    try
-                    {
-                        Draw();
-                    }
-                    catch
-                    {}
-                    
-                   // contfps++;
-                    
+                
 
-                    milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                try
+                {
+                    Draw();
                 }
+                catch
+                { }
+
 
                 /*
-                diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds2;          
+                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds;
+                if (diff >= (1000 / 59))
+                {
+                   // contfps++;
+                    milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+                }*/
+
+                
+ 
+                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds2;          
            
                 if (diff >= (1000))
                 {
                     Console.WriteLine(contfps);
                     contfps = 0;
                     milliseconds2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-                }*/
+                }
 
+                Thread.Sleep(1000 / 60);
             }
         }
 
