@@ -26,7 +26,7 @@ namespace FGInputLogger
 
         private int myVar;
 
-
+        private Guid DeviceId;
 
         public bool Vertical
         {
@@ -105,7 +105,9 @@ namespace FGInputLogger
 
                 }
 
-            
+
+            btnSelect_Click(sender, e);
+
         }
 
         private void fillImageBox()
@@ -358,10 +360,16 @@ namespace FGInputLogger
 
     private void btnSelect_Click(object sender, EventArgs e)
         {
-            SlimWrapper.Acquire(this, (Guid)cmdDevices.SelectedValue);
+            DeviceId = (Guid)cmdDevices.SelectedValue;
+
+            SlimWrapper.Acquire(this, DeviceId);
            // Program.controller = new ControlMap();
             timer.Enabled = true;
             pictureBox1.Visible = false;
+
+            
+
+
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -432,7 +440,8 @@ namespace FGInputLogger
                 Color = lblColor.BackColor,
                 Vertical = Vertical,
                 ShowFrames = ShowFrames,
-                SeparateDirections = SeparateDirections
+                SeparateDirections = SeparateDirections,
+                deviceId = DeviceId.ToString()
             };
 
             var filelocation = new SaveFileDialog();
@@ -474,6 +483,18 @@ namespace FGInputLogger
 
                     rdbVertical.Checked = obj.Vertical.ToObject<bool>();
                     rdbHorizontal.Checked = !obj.Vertical.ToObject<bool>();
+
+                    
+                    try
+                    {
+                        DeviceId = Guid.Parse(obj.deviceId.ToString());
+                        SlimWrapper.Acquire(this, DeviceId);
+                    }
+                    catch 
+                    {
+                        MessageBox.Show("Cant find the controller used in this config, please select another");
+                        btnSelect_Click(sender, e);
+                    }
 
                 }                
             }

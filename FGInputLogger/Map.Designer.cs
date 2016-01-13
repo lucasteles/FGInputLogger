@@ -70,6 +70,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.chkDirColumn = new System.Windows.Forms.CheckBox();
             this.chkFrames = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -107,7 +108,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DimGray;
-            this.button1.Location = new System.Drawing.Point(59, 79);
+            this.button1.Location = new System.Drawing.Point(60, 95);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 30);
             this.button1.TabIndex = 3;
@@ -118,7 +119,7 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.DimGray;
-            this.button2.Location = new System.Drawing.Point(59, 132);
+            this.button2.Location = new System.Drawing.Point(60, 148);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 4;
@@ -129,7 +130,7 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.DimGray;
-            this.button3.Location = new System.Drawing.Point(23, 106);
+            this.button3.Location = new System.Drawing.Point(24, 122);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(30, 30);
             this.button3.TabIndex = 5;
@@ -140,7 +141,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.DimGray;
-            this.button4.Location = new System.Drawing.Point(95, 106);
+            this.button4.Location = new System.Drawing.Point(96, 122);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(30, 30);
             this.button4.TabIndex = 6;
@@ -151,7 +152,7 @@
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.DimGray;
-            this.button5.Location = new System.Drawing.Point(202, 79);
+            this.button5.Location = new System.Drawing.Point(203, 95);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(32, 32);
             this.button5.TabIndex = 7;
@@ -162,7 +163,7 @@
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.DimGray;
-            this.button6.Location = new System.Drawing.Point(251, 79);
+            this.button6.Location = new System.Drawing.Point(252, 95);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(32, 32);
             this.button6.TabIndex = 8;
@@ -173,7 +174,7 @@
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.DimGray;
-            this.button7.Location = new System.Drawing.Point(302, 79);
+            this.button7.Location = new System.Drawing.Point(303, 95);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(32, 32);
             this.button7.TabIndex = 9;
@@ -184,7 +185,7 @@
             // button8
             // 
             this.button8.BackColor = System.Drawing.Color.DimGray;
-            this.button8.Location = new System.Drawing.Point(355, 79);
+            this.button8.Location = new System.Drawing.Point(356, 95);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(32, 32);
             this.button8.TabIndex = 10;
@@ -195,7 +196,7 @@
             // button9
             // 
             this.button9.BackColor = System.Drawing.Color.DimGray;
-            this.button9.Location = new System.Drawing.Point(202, 132);
+            this.button9.Location = new System.Drawing.Point(203, 148);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(32, 32);
             this.button9.TabIndex = 11;
@@ -206,7 +207,7 @@
             // button10
             // 
             this.button10.BackColor = System.Drawing.Color.DimGray;
-            this.button10.Location = new System.Drawing.Point(251, 132);
+            this.button10.Location = new System.Drawing.Point(252, 148);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(32, 32);
             this.button10.TabIndex = 12;
@@ -217,7 +218,7 @@
             // button11
             // 
             this.button11.BackColor = System.Drawing.Color.DimGray;
-            this.button11.Location = new System.Drawing.Point(302, 132);
+            this.button11.Location = new System.Drawing.Point(303, 148);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(32, 32);
             this.button11.TabIndex = 13;
@@ -228,7 +229,7 @@
             // button12
             // 
             this.button12.BackColor = System.Drawing.Color.DimGray;
-            this.button12.Location = new System.Drawing.Point(355, 132);
+            this.button12.Location = new System.Drawing.Point(356, 148);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(32, 32);
             this.button12.TabIndex = 14;
@@ -248,7 +249,7 @@
             this.lblPush.AutoSize = true;
             this.lblPush.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPush.ForeColor = System.Drawing.Color.Blue;
-            this.lblPush.Location = new System.Drawing.Point(196, 175);
+            this.lblPush.Location = new System.Drawing.Point(208, 183);
             this.lblPush.Name = "lblPush";
             this.lblPush.Size = new System.Drawing.Size(267, 31);
             this.lblPush.TabIndex = 16;
@@ -257,9 +258,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 36);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 32);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(469, 169);
+            this.pictureBox1.Size = new System.Drawing.Size(469, 182);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
@@ -487,6 +488,15 @@
             this.chkFrames.Text = "Show frames of buttons";
             this.chkFrames.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(21, 71);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 13);
+            this.label9.TabIndex = 41;
+            this.label9.Text = "Controller Map:";
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -533,6 +543,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.label9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Map";
@@ -591,5 +602,6 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.CheckBox chkDirColumn;
         private System.Windows.Forms.CheckBox chkFrames;
+        private System.Windows.Forms.Label label9;
     }
 }
