@@ -99,7 +99,7 @@ namespace FGInputLogger
 
                     Draw();
 
-                    contfps++;
+                   // contfps++;
                     
 
                     milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
@@ -217,7 +217,7 @@ namespace FGInputLogger
                 var lastIsDiagonal = false;
 
                 if (inputs.Count>0)
-                foreach (var i in inputs.First())
+                foreach (var i in inputs.First().ToList())
                     lastIsDiagonal = lastIsDiagonal || i.ToString().Contains("-");
 
                 if ( (up && left)|| (up && right) || (down && left) || (down && right) )
@@ -497,7 +497,7 @@ namespace FGInputLogger
                         if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
                         {
                                int space = 0;
-                               foreach (var ix in ImageMap[imageMapId])
+                               foreach (var ix in ImageMap[imageMapId].ToList())
                               {
                                                              
                                 var file = "themes/" + folder + "/" + ix.ToString() + ".png";
