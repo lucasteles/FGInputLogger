@@ -3,8 +3,9 @@
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/ico.png)
 # Input Logger for Fighting Games (training style)
 ### *beta
+
 ## [DOWNLOAD HERE](https://lucasteles.github.io/assets/FGInputLogger.zip)
-###  [(Tutorial) - Configure in OBS](https://github.com/lucasteles/FGInputLogger/blob/master/OBS_Tutorial.md)
+## [(Tutorial) - Configure in OBS](https://github.com/lucasteles/FGInputLogger/blob/master/OBS_Tutorial.md)
 
 - Cool module for your stream HUD (set the background color transparent in OBS or another)
 
