@@ -1,7 +1,7 @@
 ### 1 - Open OBS and set your scene
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/1.png)
 
-### 2 - Open and configure the FGInputLogger (DONT MINIMIZE)
+### 2 - Open and configure the FGInputLogger (NOT MINIMIZE!)
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/2.png)
 ### 3 -  In OBS, Right click in Sorces, Add a Window Capture
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/3.png)
