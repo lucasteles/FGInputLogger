@@ -9,6 +9,7 @@
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/4.png)
 ### 5 - Adjust the size of the window in OBS, may be necessary resize the width of the FGInputLogger to fit, if you resize the FGInputLogger, in OBS edit the window capture source and click in OK.
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/5.png)
+### The box size in OBS change if you change de window size, but to refresh you need to edit in obs sources or delete e add again.
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/5-2.png)
 ### Tip: In the FGInputLogger configuration you can define de size of the icons, this can help to adjust to your scene:
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/tip.png)
