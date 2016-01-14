@@ -486,7 +486,7 @@ namespace FGInputLogger
 
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            var BlankColumn = (SeparateDirections ? inputSize : 0);
+           
 
 
             
@@ -498,6 +498,9 @@ namespace FGInputLogger
                 int adjust = 0;
                 for (int j = 0; j < inputs[i].Count; j++)
                     {
+
+                        var BlankColumn = (SeparateDirections && HasButtonsOnly(inputs[i]) ? inputSize : 0);
+
 
                         int imageMapId = 0;
                         if (int.TryParse(inputs[i][j].ToString(), out imageMapId))
@@ -638,6 +641,22 @@ namespace FGInputLogger
         {
             stopThread = true;
 
+        }
+
+        private bool HasButtonsOnly(IList<Object> list)
+        {
+        
+            var ret = true;
+            int _;
+            for (int i = 0; i < list.Count(); i++)
+                if (!int.TryParse(list[i].ToString() ,out _))
+                {
+                    ret = false;
+                    break;
+                }
+
+            return ret;
+            
         }
     }
 }
