@@ -13,15 +13,15 @@
 alt="Video" width="240" height="180" border="2" /></a>
 
 
-## Options:
-
-- Config screen
-
-![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/conf.png)
+## Description:
 
 - See your inputs like a FG training mode
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print.png)
+
+- Config screen
+
+![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/conf.png)
 
 - Custom themes for different games
 
