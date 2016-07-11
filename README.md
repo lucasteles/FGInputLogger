@@ -1,7 +1,7 @@
 
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/ico.png)
-# Input Logger for Fighting Games (training style) (beta)
+# Input Logger for Fighting Games (training style)
 
 
 - Cool module for your stream HUD 
@@ -14,6 +14,8 @@
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=HHRY8DZ0cP4
 " target="_blank"><img src="http://img.youtube.com/vi/HHRY8DZ0cP4/0.jpg" 
 alt="Video" width="240" height="180" border="2" /></a>
+
+## [Obs Project Page](https://obsproject.com/forum/resources/fginputlogger.418)
 
 
 ## Description:
@@ -46,5 +48,7 @@ alt="Video" width="240" height="180" border="2" /></a>
 - Show pressed buttons frames 
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print5.png)
+
+
 
 
