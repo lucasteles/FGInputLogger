@@ -71,6 +71,7 @@
             this.chkDirColumn = new System.Windows.Forms.CheckBox();
             this.chkFrames = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.chkSound = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -311,7 +312,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(400, 488);
+            this.button13.Location = new System.Drawing.Point(400, 523);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
             this.button13.TabIndex = 23;
@@ -322,7 +323,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 305);
+            this.pictureBox2.Location = new System.Drawing.Point(7, 340);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(468, 155);
             this.pictureBox2.TabIndex = 24;
@@ -331,7 +332,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 335);
+            this.label5.Location = new System.Drawing.Point(20, 370);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 26;
@@ -350,7 +351,7 @@
             "MK",
             "HK",
             "KKK"});
-            this.cmnButtons.Location = new System.Drawing.Point(67, 330);
+            this.cmnButtons.Location = new System.Drawing.Point(67, 365);
             this.cmnButtons.Name = "cmnButtons";
             this.cmnButtons.Size = new System.Drawing.Size(69, 21);
             this.cmnButtons.TabIndex = 25;
@@ -359,7 +360,7 @@
             // lstFiles
             // 
             this.lstFiles.CheckBoxes = true;
-            this.lstFiles.Location = new System.Drawing.Point(142, 330);
+            this.lstFiles.Location = new System.Drawing.Point(142, 365);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.Size = new System.Drawing.Size(329, 111);
             this.lstFiles.TabIndex = 27;
@@ -368,7 +369,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 314);
+            this.label6.Location = new System.Drawing.Point(139, 349);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 13);
             this.label6.TabIndex = 28;
@@ -376,7 +377,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(7, 466);
+            this.btnSave.Location = new System.Drawing.Point(7, 501);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(56, 23);
             this.btnSave.TabIndex = 29;
@@ -386,7 +387,7 @@
             // 
             // btnLoad
             // 
-            this.btnLoad.Location = new System.Drawing.Point(7, 488);
+            this.btnLoad.Location = new System.Drawing.Point(7, 523);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(56, 23);
             this.btnLoad.TabIndex = 30;
@@ -497,11 +498,21 @@
             this.label9.TabIndex = 41;
             this.label9.Text = "Controller Map:";
             // 
+            // chkSound
+            // 
+            this.chkSound.Location = new System.Drawing.Point(347, 302);
+            this.chkSound.Name = "chkSound";
+            this.chkSound.Size = new System.Drawing.Size(112, 32);
+            this.chkSound.TabIndex = 42;
+            this.chkSound.Text = "Play sound on button press";
+            this.chkSound.UseVisualStyleBackColor = true;
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 512);
+            this.ClientSize = new System.Drawing.Size(494, 551);
+            this.Controls.Add(this.chkSound);
             this.Controls.Add(this.chkFrames);
             this.Controls.Add(this.chkDirColumn);
             this.Controls.Add(this.btnPicker);
@@ -603,5 +614,6 @@
         private System.Windows.Forms.CheckBox chkDirColumn;
         private System.Windows.Forms.CheckBox chkFrames;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox chkSound;
     }
 }

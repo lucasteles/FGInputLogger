@@ -24,7 +24,7 @@ namespace FGInputLogger
         public bool OK =  false;
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
-        private int myVar;
+        
 
         private Guid DeviceId;
 
@@ -59,6 +59,16 @@ namespace FGInputLogger
                 return lblColor.BackColor;
             }
         }
+
+        public bool PlaySounds
+        {
+            get
+            {
+                return chkSound.Checked;
+            }
+        }
+
+
 
         public Map()
         {
@@ -107,6 +117,12 @@ namespace FGInputLogger
 
 
             btnSelect_Click(sender, e);
+
+
+            if (File.Exists("Config.json"))
+            {
+                LoadConfig("Config.json");
+            }
 
         }
 
@@ -441,13 +457,15 @@ namespace FGInputLogger
                 Vertical = Vertical,
                 ShowFrames = ShowFrames,
                 SeparateDirections = SeparateDirections,
-                deviceId = DeviceId.ToString()
+                deviceId = DeviceId.ToString(),
+                Sounds = PlaySounds
             };
 
             var filelocation = new SaveFileDialog();
             filelocation.FileName = "config.json";
             filelocation.Filter = "JSON|*.json";
             filelocation.Title = "Save the config file";
+            filelocation.InitialDirectory = Environment.CurrentDirectory;
             filelocation.ShowDialog();
 
             if (filelocation.FileName != "")
@@ -462,41 +480,75 @@ namespace FGInputLogger
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog();
-            dialog.Filter = "JSON|*.json";
-            dialog.Title = "Load config file";
-            dialog.ShowDialog();
 
-            if (dialog.FileName != "")
+            LoadConfig();
+
+
+        }
+
+
+        private void LoadConfig(string file = "")
+        {
+            FileStream stream=null;
+
+
+            if (file == "")
             {
-                using (var fs = new StreamReader((FileStream)dialog.OpenFile()))
+
+                var dialog = new OpenFileDialog();
+                dialog.Filter = "JSON|*.json";
+                dialog.Title = "Load config file";
+                dialog.ShowDialog();
+                file = dialog.FileName;
+                if (file!="")
+                    stream = (FileStream)dialog.OpenFile();
+
+            }
+            else
+            {
+                stream = new FileStream(file, FileMode.Open, FileAccess.ReadWrite);
+            }
+
+            try
+            {
+                
+
+                if (file != "")
                 {
-                    dynamic obj = JObject.Parse(fs.ReadToEnd());
-
-                    Program.controller = obj.Buttons.ToObject<ControlMap>();
-                    IconSize = (int)obj.IconSize;
-                    cmbTheme.SelectedItem= obj.Theme.ToString();
-                    ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>();
-                    lblColor.BackColor = obj.Color.ToObject<Color>();
-                    chkFrames.Checked = obj.ShowFrames.ToObject<bool>();
-                    chkDirColumn.Checked = obj.SeparateDirections.ToObject<bool>();
-
-                    rdbVertical.Checked = obj.Vertical.ToObject<bool>();
-                    rdbHorizontal.Checked = !obj.Vertical.ToObject<bool>();
-
-                    
-                    try
+                    using (var fs = new StreamReader(stream))
                     {
-                        DeviceId = Guid.Parse(obj.deviceId.ToString());
-                        SlimWrapper.Acquire(this, DeviceId);
-                    }
-                    catch 
-                    {
-                        MessageBox.Show("Cant find the controller used in this config, please select another");
-                        btnSelect_Click(sender, e);
-                    }
+                        dynamic obj = JObject.Parse(fs.ReadToEnd());
 
-                }                
+                        Program.controller = obj.Buttons.ToObject<ControlMap>();
+                        IconSize = (int)obj.IconSize;
+                        cmbTheme.SelectedItem = obj.Theme.ToString();
+                        ImageMap = obj.Images.ToObject<Dictionary<int, List<int>>>();
+                        lblColor.BackColor = obj.Color.ToObject<Color>();
+                        chkFrames.Checked = obj.ShowFrames.ToObject<bool>();
+                        chkDirColumn.Checked = obj.SeparateDirections.ToObject<bool>();
+                        chkSound.Checked = obj.Sounds.ToObject<bool>();
+                        rdbVertical.Checked = obj.Vertical.ToObject<bool>();
+                        rdbHorizontal.Checked = !obj.Vertical.ToObject<bool>();
+
+
+                        try
+                        {
+                            DeviceId = Guid.Parse(obj.deviceId.ToString());
+                            SlimWrapper.Acquire(this, DeviceId);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Cant find the controller used in this config, please select another");
+                            btnSelect_Click(null, EventArgs.Empty);
+                        }
+
+                    }
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show("Cant load this config file.");
             }
         }
 

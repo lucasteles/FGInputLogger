@@ -24,6 +24,15 @@ namespace FGInputLogger
                 dev.Name = di.InstanceName;
                 result.Add(dev);
             }
+
+            foreach (DeviceInstance di in dinput.GetDevices(DeviceClass.Keyboard, DeviceEnumerationFlags.AttachedOnly))
+            {
+                GamepadDevice dev = new GamepadDevice();
+                dev.Guid = di.InstanceGuid;
+                dev.Name = di.InstanceName;
+                result.Add(dev);
+            }
+
             return result;
         }
 

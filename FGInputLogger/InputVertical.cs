@@ -9,6 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,6 +30,7 @@ namespace FGInputLogger
         Dictionary<object, int> pressed = new Dictionary<object, int>();
 
         Dictionary<string, Image> Icons = new Dictionary<string, Image>();
+        Dictionary<string, SoundPlayer> Sounds = new Dictionary<string, SoundPlayer>();
 
         int inputSize = 30;
         int PlinkDelay = 1;
@@ -44,7 +46,7 @@ namespace FGInputLogger
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
         bool stopThread = false;
         bool Vertical= true;
-
+        bool Sound = false;
       
         int contfps = 0;
 
@@ -72,14 +74,22 @@ namespace FGInputLogger
             this.pictureBox1.BackColor = BackColor =  config.GetBackColor;
             SeparateDirections = config.SeparateDirections;
             ShowFrames = config.ShowFrames;
+            Sound = config.PlaySounds;
 
             if (Vertical)
                 Size = new Size(200, int.MaxValue);
             else
                 Size = new Size(int.MaxValue, 200);
 
+            var soundPath = "themes/" + folder + "/sounds";
 
-          
+            if (Directory.Exists(soundPath))
+            {
+                var soundFiles = Directory.GetFiles(soundPath, "*.wav");
+                foreach (var item in soundFiles)
+                    Sounds.Add(Path.GetFileNameWithoutExtension(item),new SoundPlayer(new MemoryStream(File.ReadAllBytes(item))));
+            }
+
             milliseconds = milliseconds2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
              thread = new Thread(new ThreadStart(MainLoop));
             thread.Start();
@@ -130,7 +140,7 @@ namespace FGInputLogger
 
             var buttons = SlimWrapper.GetInputs();
              var theInput = new List<object>();
-
+            
             #region "plink"
             //-------------------------------------------------------------
 
@@ -232,6 +242,9 @@ namespace FGInputLogger
                 Action<Object, List<int>> Add = (obj,lst) =>
                 {
                     theInput.Add(obj);
+
+                    if (Sound && Sounds.ContainsKey(obj.ToString()))
+                        Player.Play(Sounds[obj.ToString()]);
 
                     if ( HasDelayInput && pressed.ContainsKey(obj) && pressed[obj] > 0 && lst != null && Any(delayBuff, lst))
                     {
@@ -476,7 +489,7 @@ namespace FGInputLogger
 
         }
 
-        private void InputVertical_Paint(object sender, PaintEventArgs e)
+        private  void InputVertical_Paint(object sender, PaintEventArgs e)
         {
             while (inputs.Count * inputSize >= (Vertical ? this.Height : this.Width) - inputSize * 2)  {
                 inputs.Remove(inputs.Last());
@@ -510,7 +523,7 @@ namespace FGInputLogger
                               {
                                                              
                                 var file = "themes/" + folder + "/" + ix.ToString() + ".png";
-
+                                
                                 Image img = null;
 
                                 if (Icons.ContainsKey(file))
@@ -521,6 +534,9 @@ namespace FGInputLogger
                                         img = Image.FromFile(file);
                                         Icons.Add(file, img);
                                     }
+
+                                                          
+
 
                                 if (img!=null){                                    
                                     using (ImageAttributes wrapMode = new ImageAttributes())
@@ -560,7 +576,8 @@ namespace FGInputLogger
                                 Icons.Add(file, img);
                             }
 
-                            if (img != null)
+
+                       if (img != null)
                             {
                                                                
                                 using (ImageAttributes wrapMode = new ImageAttributes())
