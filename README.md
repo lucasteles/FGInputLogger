@@ -50,5 +50,7 @@ alt="Video" width="240" height="180" border="2" /></a>
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/print5.png)
 
 
+- Listen your combos
 
+![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/sound.png)
 
