@@ -41,8 +41,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=x86">
@@ -111,398 +111,266 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="themes\1_StreetFighter\sounds\1.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\2.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\3.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\4.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\5.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\6.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\7.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\8.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\down-left.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\down-right.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\down.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\left.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\right.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\up-left.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\up-right.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\sounds\up.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\4.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\5.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\6.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\7.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\8.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\down-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\down-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\down.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\up-left.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\up-right.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\4_GuiltyGear\up.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\5_KOF\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\6_NeoGeo1\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\7_NeoGeo2\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="themes\1_StreetFighter\1.png" />
+    <Content Include="themes\1_StreetFighter\2.png" />
+    <Content Include="themes\1_StreetFighter\3.png" />
+    <Content Include="themes\1_StreetFighter\4.png" />
+    <Content Include="themes\1_StreetFighter\5.png" />
+    <Content Include="themes\1_StreetFighter\6.png" />
+    <Content Include="themes\1_StreetFighter\7.png" />
+    <Content Include="themes\1_StreetFighter\8.png" />
+    <Content Include="themes\1_StreetFighter\down-left.png" />
+    <Content Include="themes\1_StreetFighter\down-right.png" />
+    <Content Include="themes\1_StreetFighter\down.png" />
+    <Content Include="themes\1_StreetFighter\left.png" />
+    <Content Include="themes\1_StreetFighter\right.png" />
+    <Content Include="themes\1_StreetFighter\sounds\1.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\2.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\3.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\4.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\5.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\6.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\7.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\8.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\down-left.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\down-right.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\down.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\left.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\right.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\up-left.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\up-right.wav" />
+    <Content Include="themes\1_StreetFighter\sounds\up.wav" />
+    <Content Include="themes\1_StreetFighter\up-left.png" />
+    <Content Include="themes\1_StreetFighter\up-right.png" />
+    <Content Include="themes\1_StreetFighter\up.png" />
+    <Content Include="themes\2_PlayStation\1.png" />
+    <Content Include="themes\2_PlayStation\2.png" />
+    <Content Include="themes\2_PlayStation\3.png" />
+    <Content Include="themes\2_PlayStation\4.png" />
+    <Content Include="themes\2_PlayStation\5.png" />
+    <Content Include="themes\2_PlayStation\6.png" />
+    <Content Include="themes\2_PlayStation\7.png" />
+    <Content Include="themes\2_PlayStation\8.png" />
+    <Content Include="themes\2_PlayStation\down-left.png" />
+    <Content Include="themes\2_PlayStation\down-right.png" />
+    <Content Include="themes\2_PlayStation\down.png" />
+    <Content Include="themes\2_PlayStation\left.png" />
+    <Content Include="themes\2_PlayStation\right.png" />
+    <Content Include="themes\2_PlayStation\sounds\1.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\4.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\5.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\6.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\7.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\8.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\down-left.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\down-right.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\down.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\left.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\right.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\up-left.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\up-right.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\sounds\up.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="themes\2_PlayStation\up-left.png" />
+    <Content Include="themes\2_PlayStation\up-right.png" />
+    <Content Include="themes\2_PlayStation\up.png" />
+    <Content Include="themes\3_Xbox\1.png" />
+    <Content Include="themes\3_Xbox\2.png" />
+    <Content Include="themes\3_Xbox\3.png" />
+    <Content Include="themes\3_Xbox\4.png" />
+    <Content Include="themes\3_Xbox\5.png" />
+    <Content Include="themes\3_Xbox\6.png" />
+    <Content Include="themes\3_Xbox\7.png" />
+    <Content Include="themes\3_Xbox\8.png" />
+    <Content Include="themes\3_Xbox\arrow.png" />
+    <Content Include="themes\3_Xbox\down-left.png" />
+    <Content Include="themes\3_Xbox\down-right.png" />
+    <Content Include="themes\3_Xbox\down.png" />
+    <Content Include="themes\3_Xbox\left.png" />
+    <Content Include="themes\3_Xbox\right.png" />
+    <Content Include="themes\3_Xbox\sounds\1.wav" />
+    <Content Include="themes\3_Xbox\sounds\2.wav" />
+    <Content Include="themes\3_Xbox\sounds\3.wav" />
+    <Content Include="themes\3_Xbox\sounds\4.wav" />
+    <Content Include="themes\3_Xbox\sounds\5.wav" />
+    <Content Include="themes\3_Xbox\sounds\6.wav" />
+    <Content Include="themes\3_Xbox\sounds\7.wav" />
+    <Content Include="themes\3_Xbox\sounds\8.wav" />
+    <Content Include="themes\3_Xbox\sounds\down-left.wav" />
+    <Content Include="themes\3_Xbox\sounds\down-right.wav" />
+    <Content Include="themes\3_Xbox\sounds\down.wav" />
+    <Content Include="themes\3_Xbox\sounds\left.wav" />
+    <Content Include="themes\3_Xbox\sounds\right.wav" />
+    <Content Include="themes\3_Xbox\sounds\up-left.wav" />
+    <Content Include="themes\3_Xbox\sounds\up-right.wav" />
+    <Content Include="themes\3_Xbox\sounds\up.wav" />
+    <Content Include="themes\3_Xbox\up-left.png" />
+    <Content Include="themes\3_Xbox\up-right.png" />
+    <Content Include="themes\3_Xbox\up.png" />
+    <Content Include="themes\4_GuiltyGear\1.png" />
+    <Content Include="themes\4_GuiltyGear\2.png" />
+    <Content Include="themes\4_GuiltyGear\3.png" />
+    <Content Include="themes\4_GuiltyGear\4.png" />
+    <Content Include="themes\4_GuiltyGear\5.png" />
+    <Content Include="themes\4_GuiltyGear\6.png" />
+    <Content Include="themes\4_GuiltyGear\7.png" />
+    <Content Include="themes\4_GuiltyGear\8.png" />
+    <Content Include="themes\4_GuiltyGear\arrow.png" />
+    <Content Include="themes\4_GuiltyGear\down-left.png" />
+    <Content Include="themes\4_GuiltyGear\down-right.png" />
+    <Content Include="themes\4_GuiltyGear\down.png" />
+    <Content Include="themes\4_GuiltyGear\left.png" />
+    <Content Include="themes\4_GuiltyGear\right.png" />
+    <Content Include="themes\4_GuiltyGear\sounds\1.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\2.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\3.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\4.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\5.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\6.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\7.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\8.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\down-left.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\down-right.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\down.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\left.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\right.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\up-left.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\up-right.wav" />
+    <Content Include="themes\4_GuiltyGear\sounds\up.wav" />
+    <Content Include="themes\4_GuiltyGear\up-left.png" />
+    <Content Include="themes\4_GuiltyGear\up-right.png" />
+    <Content Include="themes\4_GuiltyGear\up.png" />
+    <Content Include="themes\5_KOF\1.png" />
+    <Content Include="themes\5_KOF\2.png" />
+    <Content Include="themes\5_KOF\3.png" />
+    <Content Include="themes\5_KOF\4.png" />
+    <Content Include="themes\5_KOF\5.png" />
+    <Content Include="themes\5_KOF\6.png" />
+    <Content Include="themes\5_KOF\7.png" />
+    <Content Include="themes\5_KOF\8.png" />
+    <Content Include="themes\5_KOF\down-left.png" />
+    <Content Include="themes\5_KOF\down-right.png" />
+    <Content Include="themes\5_KOF\down.png" />
+    <Content Include="themes\5_KOF\left.png" />
+    <Content Include="themes\5_KOF\right.png" />
+    <Content Include="themes\5_KOF\sounds\1.wav" />
+    <Content Include="themes\5_KOF\sounds\2.wav" />
+    <Content Include="themes\5_KOF\sounds\3.wav" />
+    <Content Include="themes\5_KOF\sounds\4.wav" />
+    <Content Include="themes\5_KOF\sounds\5.wav" />
+    <Content Include="themes\5_KOF\sounds\6.wav" />
+    <Content Include="themes\5_KOF\sounds\7.wav" />
+    <Content Include="themes\5_KOF\sounds\8.wav" />
+    <Content Include="themes\5_KOF\sounds\down-left.wav" />
+    <Content Include="themes\5_KOF\sounds\down-right.wav" />
+    <Content Include="themes\5_KOF\sounds\down.wav" />
+    <Content Include="themes\5_KOF\sounds\left.wav" />
+    <Content Include="themes\5_KOF\sounds\right.wav" />
+    <Content Include="themes\5_KOF\sounds\up-left.wav" />
+    <Content Include="themes\5_KOF\sounds\up-right.wav" />
+    <Content Include="themes\5_KOF\sounds\up.wav" />
+    <Content Include="themes\5_KOF\up-left.png" />
+    <Content Include="themes\5_KOF\up-right.png" />
+    <Content Include="themes\5_KOF\up.png" />
+    <Content Include="themes\6_NeoGeo1\1.png" />
+    <Content Include="themes\6_NeoGeo1\2.png" />
+    <Content Include="themes\6_NeoGeo1\3.png" />
+    <Content Include="themes\6_NeoGeo1\4.png" />
+    <Content Include="themes\6_NeoGeo1\5.png" />
+    <Content Include="themes\6_NeoGeo1\6.png" />
+    <Content Include="themes\6_NeoGeo1\7.png" />
+    <Content Include="themes\6_NeoGeo1\8.png" />
+    <Content Include="themes\6_NeoGeo1\down-left.png" />
+    <Content Include="themes\6_NeoGeo1\down-right.png" />
+    <Content Include="themes\6_NeoGeo1\down.png" />
+    <Content Include="themes\6_NeoGeo1\left.png" />
+    <Content Include="themes\6_NeoGeo1\right.png" />
+    <Content Include="themes\6_NeoGeo1\sounds\1.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\2.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\3.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\4.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\5.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\6.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\7.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\8.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\down-left.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\down-right.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\down.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\left.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\right.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\up-left.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\up-right.wav" />
+    <Content Include="themes\6_NeoGeo1\sounds\up.wav" />
+    <Content Include="themes\6_NeoGeo1\up-left.png" />
+    <Content Include="themes\6_NeoGeo1\up-right.png" />
+    <Content Include="themes\6_NeoGeo1\up.png" />
+    <Content Include="themes\7_NeoGeo2\1.png" />
+    <Content Include="themes\7_NeoGeo2\2.png" />
+    <Content Include="themes\7_NeoGeo2\3.png" />
+    <Content Include="themes\7_NeoGeo2\4.png" />
+    <Content Include="themes\7_NeoGeo2\5.png" />
+    <Content Include="themes\7_NeoGeo2\6.png" />
+    <Content Include="themes\7_NeoGeo2\7.png" />
+    <Content Include="themes\7_NeoGeo2\8.png" />
+    <Content Include="themes\7_NeoGeo2\down-left.png" />
+    <Content Include="themes\7_NeoGeo2\down-right.png" />
+    <Content Include="themes\7_NeoGeo2\down.png" />
+    <Content Include="themes\7_NeoGeo2\left.png" />
+    <Content Include="themes\7_NeoGeo2\right.png" />
+    <Content Include="themes\7_NeoGeo2\sounds\1.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\2.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\3.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\4.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\5.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\6.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\7.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\8.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\down-left.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\down-right.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\down.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\left.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\right.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\up-left.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\up-right.wav" />
+    <Content Include="themes\7_NeoGeo2\sounds\up.wav" />
+    <Content Include="themes\7_NeoGeo2\up-left.png" />
+    <Content Include="themes\7_NeoGeo2\up-right.png" />
+    <Content Include="themes\7_NeoGeo2\up.png" />
     <None Include="img\ico.ico" />
     <Content Include="FodyWeavers.xml" />
-    <Content Include="themes\2_PlayStation\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\2_PlayStation\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\1_StreetFighter\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\arrow.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\down-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\down-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\down.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\up-left.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\up-right.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="themes\3_Xbox\up.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.3\build\Fody.targets')" />
@@ -548,6 +416,9 @@ foreach (var item in filesToCleanup)
   <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget">
     <CosturaCleanup Config="FodyWeavers.xml" Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)themes" "$(TargetDir)themes" /s /i /y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -24,6 +24,8 @@ namespace FGInputLogger
         public List<int> HK { get; set; }
         public List<int> KKK { get; set; }
 
+        public List<int> Clear { get; set; }
+
         public ControlMap()
         {
             Left = new List<int>();
@@ -41,6 +43,7 @@ namespace FGInputLogger
             HK = new List<int>();
             KKK = new List<int>();
 
+            Clear = new List<int>();
         }
 
         public bool Empty()
@@ -56,7 +59,9 @@ namespace FGInputLogger
                 LK.Count() +
                 MK.Count() +
                 HK.Count() +
-                KKK.Count()) == 0;
+                KKK.Count() +
+                Clear.Count()                
+                ) == 0;
 
 
 

@@ -263,6 +263,11 @@ namespace FGInputLogger
                             lblPush.Visible = false;
                             getKeyState = false;
                             break;
+                        case "Clear":
+                            Program.controller.Clear = buttons.buttons;
+                            lblPush.Visible = false;
+                            getKeyState = false;
+                            break;
 
                     }
                 }
@@ -331,6 +336,11 @@ namespace FGInputLogger
                     setButtonColor("KK", true);
                 else
                     setButtonColor("KK", false);
+
+                if (Program.controller.Clear.Intersect(buttons.buttons).Any())
+                    setButtonColor("Clear", true);
+                else
+                    setButtonColor("Clear", false);
 
             }
 
@@ -564,5 +574,6 @@ namespace FGInputLogger
             }
         }
 
+    
     }
 }

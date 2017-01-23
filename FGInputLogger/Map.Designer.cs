@@ -72,6 +72,7 @@
             this.chkFrames = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.chkSound = new System.Windows.Forms.CheckBox();
+            this.cmdClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -193,6 +194,7 @@
             this.button8.Tag = "-";
             this.button8.Text = "PP";
             this.button8.UseVisualStyleBackColor = false;
+            
             // 
             // button9
             // 
@@ -248,18 +250,18 @@
             // lblPush
             // 
             this.lblPush.AutoSize = true;
-            this.lblPush.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPush.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPush.ForeColor = System.Drawing.Color.Blue;
             this.lblPush.Location = new System.Drawing.Point(208, 183);
             this.lblPush.Name = "lblPush";
-            this.lblPush.Size = new System.Drawing.Size(267, 31);
+            this.lblPush.Size = new System.Drawing.Size(227, 24);
             this.lblPush.TabIndex = 16;
             this.lblPush.Text = "Push The Button to Map...";
             this.lblPush.Visible = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(7, 32);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 177);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(469, 182);
             this.pictureBox1.TabIndex = 17;
@@ -507,11 +509,23 @@
             this.chkSound.Text = "Play sound on button press";
             this.chkSound.UseVisualStyleBackColor = true;
             // 
+            // cmdClear
+            // 
+            this.cmdClear.BackColor = System.Drawing.Color.DimGray;
+            this.cmdClear.Location = new System.Drawing.Point(436, 121);
+            this.cmdClear.Name = "cmdClear";
+            this.cmdClear.Size = new System.Drawing.Size(46, 23);
+            this.cmdClear.TabIndex = 43;
+            this.cmdClear.Tag = "-";
+            this.cmdClear.Text = "Clear";
+            this.cmdClear.UseVisualStyleBackColor = false;
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 551);
+            this.Controls.Add(this.cmdClear);
             this.Controls.Add(this.chkSound);
             this.Controls.Add(this.chkFrames);
             this.Controls.Add(this.chkDirColumn);
@@ -615,5 +629,6 @@
         private System.Windows.Forms.CheckBox chkFrames;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chkSound;
+        private System.Windows.Forms.Button cmdClear;
     }
 }
