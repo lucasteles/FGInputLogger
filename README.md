@@ -8,7 +8,7 @@
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/how_to_obs/6.png)
 
 
-## [DOWNLOAD HERE](https://obsproject.com/forum/resources/fginputlogger-fgil.418/download)
+## [DOWNLOAD HERE](https://github.com/lucasteles/FGInputLogger/releases/download/v1.0.3/FGInputLogger.zip)
 ## [(Tutorial) - Configure in OBS](https://github.com/lucasteles/FGInputLogger/blob/master/OBS_Tutorial.md)
 ## [See video:](https://www.youtube.com/watch?v=HHRY8DZ0cP4) 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=HHRY8DZ0cP4
