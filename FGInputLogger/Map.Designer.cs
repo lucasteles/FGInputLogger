@@ -73,6 +73,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.chkSound = new System.Windows.Forms.CheckBox();
             this.cmdClear = new System.Windows.Forms.Button();
+            this.chkLeftToRight = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -194,7 +195,6 @@
             this.button8.Tag = "-";
             this.button8.Text = "PP";
             this.button8.UseVisualStyleBackColor = false;
-            
             // 
             // button9
             // 
@@ -362,6 +362,7 @@
             // lstFiles
             // 
             this.lstFiles.CheckBoxes = true;
+            this.lstFiles.HideSelection = false;
             this.lstFiles.Location = new System.Drawing.Point(142, 365);
             this.lstFiles.Name = "lstFiles";
             this.lstFiles.Size = new System.Drawing.Size(329, 111);
@@ -475,7 +476,7 @@
             // 
             // chkDirColumn
             // 
-            this.chkDirColumn.Location = new System.Drawing.Point(229, 265);
+            this.chkDirColumn.Location = new System.Drawing.Point(229, 302);
             this.chkDirColumn.Name = "chkDirColumn";
             this.chkDirColumn.Size = new System.Drawing.Size(112, 32);
             this.chkDirColumn.TabIndex = 39;
@@ -520,11 +521,21 @@
             this.cmdClear.Text = "Clear";
             this.cmdClear.UseVisualStyleBackColor = false;
             // 
+            // chkLeftToRight
+            // 
+            this.chkLeftToRight.Location = new System.Drawing.Point(229, 265);
+            this.chkLeftToRight.Name = "chkLeftToRight";
+            this.chkLeftToRight.Size = new System.Drawing.Size(112, 32);
+            this.chkLeftToRight.TabIndex = 44;
+            this.chkLeftToRight.Text = "Left to right (Horizontal only)";
+            this.chkLeftToRight.UseVisualStyleBackColor = true;
+            // 
             // Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 551);
+            this.Controls.Add(this.chkLeftToRight);
             this.Controls.Add(this.cmdClear);
             this.Controls.Add(this.chkSound);
             this.Controls.Add(this.chkFrames);
@@ -630,5 +641,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox chkSound;
         private System.Windows.Forms.Button cmdClear;
+        private System.Windows.Forms.CheckBox chkLeftToRight;
     }
 }

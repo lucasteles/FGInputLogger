@@ -2,12 +2,10 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace FGInputLogger
@@ -21,10 +19,10 @@ namespace FGInputLogger
 
         public int IconSize = 30;
         public string Theme = "";
-        public bool OK =  false;
+        public bool OK = false;
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
 
-        
+
 
         private Guid DeviceId;
 
@@ -68,7 +66,7 @@ namespace FGInputLogger
             }
         }
 
-
+        public bool HorizontalLeftToRight => chkLeftToRight.Checked;
 
         public Map()
         {
@@ -101,15 +99,15 @@ namespace FGInputLogger
 
             timer.Tick += Timer_Tick;
 
-            cmbTheme.DataSource = Directory.GetDirectories("themes").Select(x=>x.Split('\\')[1]).ToArray();
+            cmbTheme.DataSource = Directory.GetDirectories("themes").Select(x => x.Split('\\')[1]).ToArray();
             cmbTheme.SelectedIndex = 0;
 
             foreach (Control item in this.Controls)
                 if (item is Button)
                 {
-                     var but = (Button)item;
-                     if(but.Tag != null && but.Tag.ToString()=="-")
-                           item.Click += set_click;
+                    var but = (Button)item;
+                    if (but.Tag != null && but.Tag.ToString() == "-")
+                        item.Click += set_click;
 
 
 
@@ -130,7 +128,7 @@ namespace FGInputLogger
         {
             lstFiles.ItemChecked -= ItemChecked;
             var files = Directory.GetFiles("themes\\" + cmbTheme.SelectedValue);
-            
+
             lstFiles.LargeImageList = new ImageList();
             lstFiles.Clear();
 
@@ -150,7 +148,7 @@ namespace FGInputLogger
                     li.Tag = outN;
                     lstFiles.Items.Add(li);
 
-                    
+
                     i++;
                 }
             }
@@ -160,13 +158,13 @@ namespace FGInputLogger
             refreshList();
 
         }
-      
+
 
         private void refreshList()
         {
 
-            
-            var buttons = ImageMap[cmnButtons.SelectedIndex+1];
+
+            var buttons = ImageMap[cmnButtons.SelectedIndex + 1];
 
             foreach (ListViewItem item in lstFiles.Items)
             {
@@ -175,17 +173,17 @@ namespace FGInputLogger
                 else
                     item.Checked = false;
 
-                
+
 
             }
 
         }
 
         private void Timer_Tick(object sender, EventArgs e)
-    {
+        {
             var buttons = SlimWrapper.GetInputs();
 
-            if (getKeyState )
+            if (getKeyState)
             {
                 if (buttons.buttons.Count > 0)
                 {
@@ -346,18 +344,18 @@ namespace FGInputLogger
 
             txtInputs.Text = string.Join(",", buttons.buttons);
 
-                        
-    }
+
+        }
 
         private void set_click(object sender, EventArgs e)
         {
-        
-                selectedButton = ((Button)sender).Text;
-                getKeyState = true;
+
+            selectedButton = ((Button)sender).Text;
+            getKeyState = true;
             lblPush.Visible = true;
         }
 
-        private void setButtonColor(string text, bool selected )
+        private void setButtonColor(string text, bool selected)
         {
             foreach (Control item in this.Controls)
             {
@@ -382,18 +380,18 @@ namespace FGInputLogger
 
         }
 
-    
 
-    private void btnSelect_Click(object sender, EventArgs e)
+
+        private void btnSelect_Click(object sender, EventArgs e)
         {
             DeviceId = (Guid)cmdDevices.SelectedValue;
 
             SlimWrapper.Acquire(this, DeviceId);
-           // Program.controller = new ControlMap();
+            // Program.controller = new ControlMap();
             timer.Enabled = true;
             pictureBox1.Visible = false;
 
-            
+
 
 
         }
@@ -465,6 +463,7 @@ namespace FGInputLogger
                 Theme = cmbTheme.SelectedValue,
                 Color = lblColor.BackColor,
                 Vertical = Vertical,
+                HorizontalLeftToRight,
                 ShowFrames = ShowFrames,
                 SeparateDirections = SeparateDirections,
                 deviceId = DeviceId.ToString(),
@@ -480,9 +479,9 @@ namespace FGInputLogger
 
             if (filelocation.FileName != "")
             {
-                using (var fs =  new StreamWriter((FileStream)filelocation.OpenFile()))
+                using (var fs = new StreamWriter((FileStream)filelocation.OpenFile()))
                 {
-                       var json = JsonConvert.SerializeObject(obj);
+                    var json = JsonConvert.SerializeObject(obj);
                     fs.Write(json);
                 }
             }
@@ -499,7 +498,7 @@ namespace FGInputLogger
 
         private void LoadConfig(string file = "")
         {
-            FileStream stream=null;
+            FileStream stream = null;
 
 
             if (file == "")
@@ -510,7 +509,7 @@ namespace FGInputLogger
                 dialog.Title = "Load config file";
                 dialog.ShowDialog();
                 file = dialog.FileName;
-                if (file!="")
+                if (file != "")
                     stream = (FileStream)dialog.OpenFile();
 
             }
@@ -521,7 +520,7 @@ namespace FGInputLogger
 
             try
             {
-                
+
 
                 if (file != "")
                 {
@@ -537,6 +536,7 @@ namespace FGInputLogger
                         chkFrames.Checked = obj.ShowFrames.ToObject<bool>();
                         chkDirColumn.Checked = obj.SeparateDirections.ToObject<bool>();
                         chkSound.Checked = obj.Sounds.ToObject<bool>();
+                        chkLeftToRight.Checked = obj.HorizontalLeftToRight?.ToObject<bool>() ?? false;
                         rdbVertical.Checked = obj.Vertical.ToObject<bool>();
                         rdbHorizontal.Checked = !obj.Vertical.ToObject<bool>();
 
@@ -565,7 +565,7 @@ namespace FGInputLogger
         private void btnPicker_Click(object sender, EventArgs e)
         {
             var colorDialog1 = new ColorDialog();
-            DialogResult result =colorDialog1.ShowDialog();
+            DialogResult result = colorDialog1.ShowDialog();
             // See if user pressed ok.
             if (result == DialogResult.OK)
             {
@@ -574,6 +574,6 @@ namespace FGInputLogger
             }
         }
 
-    
+
     }
 }

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\d\FGInputLogger" t="IncludeFlat">
+      <e p="FGInputLogger" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ControlMap.cs" t="Include" />
+        <e p="FGInputLogger.csproj" t="IncludeRecursive" />
+        <e p="FodyWeavers.xml" t="Include" />
+        <e p="GamepadDevice.cs" t="Include" />
+        <e p="img" t="Include">
+          <e p="ico.ico" t="Include" />
+        </e>
+        <e p="InputVertical.cs" t="Include" />
+        <e p="InputVertical.Designer.cs" t="Include" />
+        <e p="InputVertical.resx" t="Include" />
+        <e p="Map.cs" t="Include" />
+        <e p="Map.Designer.cs" t="Include" />
+        <e p="Map.resx" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Player.cs" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="SlimWrapper.cs" t="Include" />
+        <e p="themes" t="Include">
+          <e p="1_StreetFighter" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="2_PlayStation" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="3_Xbox" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="arrow.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="4_GuiltyGear" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="arrow.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="5_KOF" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="6_NeoGeo1" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+          <e p="7_NeoGeo2" t="Include">
+            <e p="1.png" t="Include" />
+            <e p="2.png" t="Include" />
+            <e p="3.png" t="Include" />
+            <e p="4.png" t="Include" />
+            <e p="5.png" t="Include" />
+            <e p="6.png" t="Include" />
+            <e p="7.png" t="Include" />
+            <e p="8.png" t="Include" />
+            <e p="down-left.png" t="Include" />
+            <e p="down-right.png" t="Include" />
+            <e p="down.png" t="Include" />
+            <e p="left.png" t="Include" />
+            <e p="right.png" t="Include" />
+            <e p="sounds" t="Include">
+              <e p="1.wav" t="Include" />
+              <e p="2.wav" t="Include" />
+              <e p="3.wav" t="Include" />
+              <e p="4.wav" t="Include" />
+              <e p="5.wav" t="Include" />
+              <e p="6.wav" t="Include" />
+              <e p="7.wav" t="Include" />
+              <e p="8.wav" t="Include" />
+              <e p="down-left.wav" t="Include" />
+              <e p="down-right.wav" t="Include" />
+              <e p="down.wav" t="Include" />
+              <e p="left.wav" t="Include" />
+              <e p="right.wav" t="Include" />
+              <e p="up-left.wav" t="Include" />
+              <e p="up-right.wav" t="Include" />
+              <e p="up.wav" t="Include" />
+            </e>
+            <e p="up-left.png" t="Include" />
+            <e p="up-right.png" t="Include" />
+            <e p="up.png" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="FGInputLogger.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\lucas.teles\.Rider2019.3\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\lucas.teles\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\lucas.teles\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_FGInputLogger.748054099.00" t="ExcludeRecursive" />
+  </component>
+</project>

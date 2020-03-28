@@ -1,18 +1,12 @@
-﻿using SlimDX.DirectInput;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FGInputLogger
@@ -22,7 +16,7 @@ namespace FGInputLogger
 
         List<List<object>> inputs = new List<List<object>>();
         List<List<int>> inputsTime = new List<List<int>>();
-        
+
         List<int> old = new List<int>();
         List<int> delay = new List<int>();
         List<int> delayBuff = new List<int>();
@@ -47,12 +41,15 @@ namespace FGInputLogger
         public long milliseconds2;
         public Dictionary<int, List<int>> ImageMap = new Dictionary<int, List<int>>();
         bool stopThread = false;
-        bool Vertical= true;
+        bool Vertical = true;
+
+        public bool HorizontalLeftToRight { get; private set; }
+
         bool Sound = false;
-      
+
         int contfps = 0;
 
-        
+
 
 
         public InputVertical()
@@ -60,8 +57,8 @@ namespace FGInputLogger
             InitializeComponent();
 
             MinimumSize = new Size(1, 1);
-                        
-            var config =  new Map();
+
+            var config = new Map();
 
             config.ShowDialog();
             config.timer.Stop();
@@ -73,15 +70,16 @@ namespace FGInputLogger
             this.folder = config.Theme;
             this.ImageMap = config.ImageMap;
             Vertical = config.Vertical;
-            this.pictureBox1.BackColor = BackColor =  config.GetBackColor;
+            HorizontalLeftToRight = config.HorizontalLeftToRight;
+            this.pictureBox1.BackColor = BackColor = config.GetBackColor;
             SeparateDirections = config.SeparateDirections;
             ShowFrames = config.ShowFrames;
             Sound = config.PlaySounds;
 
             if (Vertical)
-                Size = new Size(200, int.MaxValue);
+                Size = new Size(250, Screen.PrimaryScreen.Bounds.Height);
             else
-                Size = new Size(int.MaxValue, 200);
+                Size = new Size(Screen.PrimaryScreen.Bounds.Width, 250);
 
             var soundPath = "themes/" + folder + "/sounds";
 
@@ -89,21 +87,24 @@ namespace FGInputLogger
             {
                 var soundFiles = Directory.GetFiles(soundPath, "*.wav");
                 foreach (var item in soundFiles)
-                    Sounds.Add(Path.GetFileNameWithoutExtension(item),new SoundPlayer(new MemoryStream(File.ReadAllBytes(item))));
+                    Sounds.Add(Path.GetFileNameWithoutExtension(item), new SoundPlayer(new MemoryStream(File.ReadAllBytes(item))));
             }
 
+
+
+
             milliseconds = milliseconds2 = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-             thread = new Thread(new ThreadStart(MainLoop));
+            thread = new Thread(new ThreadStart(MainLoop));
             thread.Start();
         }
 
-     
+
         private void MainLoop()
         {
-            while(!stopThread)
+            while (!stopThread)
             {
 
-                
+
 
                 try
                 {
@@ -113,18 +114,8 @@ namespace FGInputLogger
                 { }
 
 
-                /*
-                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds;
-                if (diff >= (1000 / 59))
-                {
-                   // contfps++;
-                    milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-                }*/
+                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds2;
 
-                
- 
-                var diff = (DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - milliseconds2;          
-           
                 if (diff >= (1000))
                 {
                     Console.WriteLine(contfps);
@@ -251,7 +242,7 @@ namespace FGInputLogger
                     if ((up && left) || (up && right) || (down && left) || (down && right))
                         lastIsDiagonal = false;
 
-                    Action<object, List<int>> Add = (obj, lst) =>
+                    void Add(object obj, List<int> lst)
                     {
                         theInput.Add(obj);
 
@@ -445,10 +436,11 @@ namespace FGInputLogger
 
         }
 
-        private bool ValidButtonChange(IList<int> atual, IList<int> old) {
+        private bool ValidButtonChange(IList<int> atual, IList<int> old)
+        {
             var ret = false;
 
-            
+
             foreach (var item in atual)
             {
 
@@ -485,13 +477,13 @@ namespace FGInputLogger
             {
                 for (int j = 0; j < inputs[i].Count(); j++)
                 {
-                    if (inputs[i][j].Equals(btn) && inputsTime[i][j]>=0)
+                    if (inputs[i][j].Equals(btn) && inputsTime[i][j] >= 0)
                     {
                         inputsTime[i][j]++;
                         if (!pressed.ContainsKey(btn))
-                            pressed.Add(btn,0);
+                            pressed.Add(btn, 0);
                         else
-                            pressed[btn] ++;
+                            pressed[btn]++;
 
 
                         return;
@@ -501,13 +493,14 @@ namespace FGInputLogger
 
         }
 
-        private  void InputVertical_Paint(object sender, PaintEventArgs e)
+        private void InputVertical_Paint(object sender, PaintEventArgs e)
         {
+            var padding = (inputSize * 2);
 
             lock (_lock)
             {
 
-                while (inputs.Count * inputSize >= (Vertical ? this.Height : this.Width) - inputSize * 2)
+                while (inputs.Count * inputSize >= (Vertical ? this.Height : this.Width))
                 {
                     inputs.Remove(inputs.Last());
                     inputsTime.Remove(inputsTime.Last());
@@ -562,12 +555,19 @@ namespace FGInputLogger
                                         wrapMode.SetWrapMode(WrapMode.TileFlipXY);
                                         Rectangle rect;
                                         if (Vertical)
-                                            rect = new Rectangle(adjust + BlankColumn + space + 5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
-
+                                        {
+                                            rect = new Rectangle(adjust + BlankColumn + space + 5 + (inputSize * j), i * inputSize + 5, inputSize, inputSize);
+                                        }
                                         else
-                                            rect = new Rectangle(adjust + i * inputSize + 5, space + 5 + inputSize * j + BlankColumn, inputSize, inputSize);
+                                        {
+                                            var x = adjust + i * inputSize + 5;
+                                            var y = space + 5 + inputSize * j + BlankColumn;
 
-
+                                            if (HorizontalLeftToRight)
+                                                rect = new Rectangle(x, y, inputSize, inputSize);
+                                            else
+                                                rect = new Rectangle(Width - padding - x, y, inputSize, inputSize);
+                                        }
 
                                         e.Graphics.DrawImage(img, rect, 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, wrapMode);
 
@@ -605,9 +605,16 @@ namespace FGInputLogger
                                     if (Vertical)
                                         rect = new Rectangle(5 + inputSize * j, i * inputSize + 5, inputSize, inputSize);
                                     else
-                                        rect = new Rectangle(i * inputSize + 5, 5 + inputSize * j, inputSize, inputSize);
+                                    {
+                                        var x = (i * inputSize) + 5;
+                                        var y = 5 + inputSize * j;
+                                        if (HorizontalLeftToRight)
+                                            rect = new Rectangle(x, y, inputSize, inputSize);
+                                        else
+                                            rect = new Rectangle(Width - padding - x, y, inputSize, inputSize);
 
 
+                                    }
 
                                     e.Graphics.DrawImage(img, rect, 0, 0, img.Height, img.Width, GraphicsUnit.Pixel, wrapMode);
                                 }
@@ -617,10 +624,33 @@ namespace FGInputLogger
                     }
                     if (ShowFrames)
                     {
+
                         if (Vertical)
-                            e.Graphics.DrawString(String.Join(",", inputsTime[i]).Replace("-1", "-"), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, CountIcons(inputs[i]) * inputSize + inputSize / 2, i * inputSize + 4);
+                        {
+                            var fontSize = inputSize / 2;
+                            var font = new Font(new FontFamily("Consolas"), fontSize);
+
+                            e.Graphics
+                                .DrawString(String.Join(",", inputsTime[i]).Replace("-1", "*"),
+                                font, Brushes.White,
+                                CountIcons(inputs[i]) * inputSize + inputSize / 2,
+                                i * inputSize + 4);
+                        }
                         else
-                            e.Graphics.DrawString(String.Join("\n", inputsTime[i]).Replace("-1", "-"), new Font(new FontFamily("arial"), inputSize / 3), Brushes.White, i * inputSize + 4, CountIcons(inputs[i]) * inputSize + inputSize / 2);
+                        {
+                            var text = String.Join("\n", inputsTime[i]).Replace("-1", "*");
+                            var maxText = inputsTime[i].Select(t => t.ToString()).OrderByDescending(t => t.Length).First().Length;
+                            var fontSize = inputSize / Math.Max(maxText, 2);
+                            var font = new Font(new FontFamily("Consolas"), fontSize);
+                            var x = (i * inputSize) + 4;
+                            var y = (CountIcons(inputs[i]) * inputSize) + inputSize / 2;
+
+                            if (HorizontalLeftToRight)
+                                e.Graphics.DrawString(text, font, Brushes.White, x, y);
+                            else
+
+                                e.Graphics.DrawString(text, font, Brushes.White, Width - padding - x, y);
+                        }
                     }
                 }
             }
@@ -644,7 +674,7 @@ namespace FGInputLogger
 
             return ret;
         }
-       
+
 
         public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
         {
@@ -680,18 +710,18 @@ namespace FGInputLogger
 
         private bool HasButtonsOnly(IList<Object> list)
         {
-        
+
             var ret = true;
             int _;
             for (int i = 0; i < list.Count(); i++)
-                if (!int.TryParse(list[i].ToString() ,out _))
+                if (!int.TryParse(list[i].ToString(), out _))
                 {
                     ret = false;
                     break;
                 }
 
             return ret;
-            
+
         }
     }
 }
