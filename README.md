@@ -1,4 +1,5 @@
-
+# ⚠️ This project is no longer active! please check [Input Display](https://github.com/lucasteles/InputDisplay)
+---
 
 ![](https://raw.githubusercontent.com/lucasteles/FGInputLogger/master/FGInputLogger/img/ico.png)
 # Input Logger for Fighting Games (training style)
